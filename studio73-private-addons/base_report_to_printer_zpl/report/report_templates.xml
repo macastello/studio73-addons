@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="zpl_company_logo">
+        <!-- prettier-ignore-start -->
+        <t t-translation="off">
+            <!-- Al llamar a esta plantilla se pueden establecer logo_size, logo_rotate y logo_pos -->
+            <t name="zpl_add_logo" t-out="doc.company_id.get_zpl_logo('LOGO', size=logo_size or 200, rotate=logo_rotate or 0)" />
+            <t name="xa">
+^XA
+            </t>
+            <t name="ci128">
+^CI28
+            </t>
+            <t name="logo">
+^FO<t t-out="logo_pos" />^XGR:LOGO.GRF,1,1^FS
+            </t>
+<t t-out="0"/>
+            <t name="xz">
+^XZ
+            </t>
+            <t name="zpl_remove_logo">
+^XA
+^IDR:LOGO.GRF^FS
+^XZ
+            </t>
+        </t>
+        <!-- prettier-ignore-end -->
+    </template>
+</odoo>

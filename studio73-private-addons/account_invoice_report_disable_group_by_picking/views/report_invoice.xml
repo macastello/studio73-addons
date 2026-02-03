@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_invoice_document"
+        inherit_id="account_invoice_report_grouped_by_picking.report_invoice_document"
+    >
+        <xpath
+            expr="//t[@t-if='picking != last_picking']/tr[@t-else='']"
+            position="before"
+        >
+            <t t-elif="not o.report_grouped_by_picking" />
+        </xpath>
+        <xpath
+            expr="//tbody[hasclass('invoice_tbody')]//tr[hasclass('is-subtotal')]/parent::t"
+            position="attributes"
+        >
+            <attribute name="t-if">
+                current_section and (lines_group_last or
+                lines_grouped[lines_group_index+1]['line'].display_type ==
+                'line_section')
+            </attribute>
+        </xpath>
+    </template>
+</odoo>

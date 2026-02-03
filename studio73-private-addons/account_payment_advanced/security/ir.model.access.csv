@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_model_account_payment_advanced,account.payment.advanced,model_account_payment_advanced,account.group_account_invoice,1,1,1,1
+access_model_account_payment_advanced_entry,account.payment.advanced.entry,model_account_payment_entry,account.group_account_invoice,1,1,1,1

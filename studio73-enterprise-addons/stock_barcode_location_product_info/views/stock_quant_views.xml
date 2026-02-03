@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_quant_minimal_view_tree" model="ir.ui.view">
+        <field name="name">stock.quant.minimal.view.tree</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <tree string="Stock disponible" js_class="singleton_list">
+                <field
+                    name="product_id"
+                    readonly="1"
+                    invisible="not context.get('scan_location')"
+                />
+                <field name="location_id" readonly="1" column_invisible="1" />
+                <field
+                    name="location_name_id"
+                    invisible="context.get('scan_location', False)"
+                />
+                <field
+                    name="available_quantity"
+                    string="Ctd. disp."
+                    readonly="1"
+                    optional="show"
+                />
+                <field name="quantity" string="Ctd." optional="show" />
+            </tree>
+        </field>
+    </record>
+    <record id="stock_quant_barcode_kanban_2_inherit" model="ir.ui.view">
+        <field name="name">stock.quant.kanban.barcode.2.inherit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock_barcode.stock_quant_barcode_kanban_2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="before">
+                <div class="mb4">
+                    <field name="product_id" />
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='quantity']//parent::div" position="before">
+                <div class="mb4" invisible="not lot_id">
+                    <field name="lot_id" />
+                    <field name="use_expiration_date" invisible="1" />
+                    <span invisible="not use_expiration_date">|</span>
+                    <field
+                        name="expiration_date"
+                        widget="date"
+                        invisible="not use_expiration_date"
+                    />
+                </div>
+                <div class="mb4">
+                    Ctd Total:
+                    <field name="quantity" />
+                </div>
+                <div class="mb4">
+                    Ctd reservada:
+                    <field name="reserved_quantity" />
+                </div>
+                <div class="mb4">
+                    Ctd disponible:
+                    <field name="available_quantity" />
+                </div>
+            </xpath>
+            <xpath
+                expr="//field[@name='product_uom_id']//parent::div"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_quant_minimal_search_view" model="ir.ui.view">
+        <field name="name">stock.quant.minimal.view.search</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <search string="Stock disponible">
+                <filter
+                    string="Producto"
+                    name="groupby_product_id"
+                    context="{'group_by': 'product_id'}"
+                />
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_stock_quant_minimal_view">
+        <field name="context">{}</field>
+        <field name="name">Visualizar Stock</field>
+        <field name="res_model">stock.quant</field>
+        <field name="search_view_id" ref="stock_quant_minimal_search_view" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Visualizar stock disponible en ubicación o producto
+            </p>
+        </field>
+    </record>
+    <record
+        id="stock_barcode_location_product_menu_action_main_menu"
+        model="ir.actions.client"
+    >
+        <field name="name">Visualizar stock</field>
+        <field name="tag">stock_barcode_location_product_main_menu</field>
+        <field name="target">fullscreen</field>
+    </record>
+    <menuitem
+        id="stock_barcode_location_product_menu"
+        action="stock_barcode_location_product_menu_action_main_menu"
+        web_icon="stock_barcode_location_product_info,static/description/menu.png"
+    />
+</odoo>

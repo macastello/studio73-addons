@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo noupdate="1">
+    <record id="inner_stock_package_type" model="stock.package.type">
+        <field name="name">Inner</field>
+        <field name="allow_auto_create_packaging">True</field>
+    </record>
+    <record id="outer_stock_package_type" model="stock.package.type">
+        <field name="name">Outer</field>
+        <field name="allow_auto_create_packaging">True</field>
+    </record>
+    <record id="master_stock_package_type" model="stock.package.type">
+        <field name="name">Master</field>
+        <field name="allow_auto_create_packaging">True</field>
+    </record>
+    <record id="pallet_stock_package_type" model="stock.package.type">
+        <field name="name">Pallet</field>
+        <field name="allow_auto_create_packaging">True</field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_move_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.extension</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="show_stock_valuation_layer_message" invisible="1" />
+                <button
+                    name="button_draft_confirm"
+                    string="Restablecer a borrador"
+                    type="object"
+                    groups="account.group_account_invoice"
+                    invisible="state == 'draft' or show_stock_valuation_layer_message == False"
+                    data-hotkey="q"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_acc_payment_document">
+        <div class="header">
+            <div class="row">
+                <div class="col-9">
+                    <h3 t-field="company.name" />
+                    Fecha de impresión:
+                    <b
+                        t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"
+                    />
+                </div>
+                <div class="col-3 text-right">
+                    <span>Hoja número</span>
+                    <span class="page" />
+                    de
+                    <span class="topage" />
+                </div>
+            </div>
+            <h3 t-field="o.name" />
+            <table class="table table-condensed">
+                <tbody>
+                    <tr>
+                        <th style="border: none;" width="20%">Cliente</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span t-out="o.partner_id.display_name" />
+                        </td>
+                        <th style="border: none;" width="20%">Fecha de pago</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span t-field="o.date" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border: none;">Importe pagado</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-field="o.amount"
+                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                            />
+                        </td>
+                        <th style="border: none;">Método de pago</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span t-field="o.journal_id" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border: none;">Fecha vencimiento</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span t-field="o.date_maturity" />
+                        </td>
+                        <th style="border: none;">Importe de la diferencia</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-field="o.writeoff_amount"
+                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border: none;">Ref. pago</th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span t-field="o.communication" />
+                        </td>
+                        <th style="border: none;">
+                            <t t-if="o.writeoff_amount != 0 or o.force_diff == True">
+                                Diferencia de pago
+                            </t>
+                        </th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-if="o.writeoff_amount != 0 or o.force_diff == True"
+                                t-field="o.payment_difference_handling"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border: none;">
+                            <t t-if="o.journal_id_type == 'bank'">Banco</t>
+                        </th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-if="o.journal_id_type == 'bank'"
+                                t-field="o.partner_bank_id"
+                            />
+                        </td>
+                        <th style="border: none;">
+                            <t t-if="o.payment_difference_handling == 'reconcile'">
+                                Cuenta diferencial
+                            </t>
+                        </th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-if="o.payment_difference_handling == 'reconcile'"
+                                t-field="o.writeoff_account_id"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border: none;" />
+                        <td style="border: none;" />
+                        <th style="border: none;">
+                            <t t-if="o.payment_difference_handling == 'reconcile'">
+                                Comentario de la contrapartida
+                            </t>
+                        </th>
+                        <td
+                            style="border: none; max-width: 250px; min-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                        >
+                            <span
+                                t-if="o.payment_difference_handling == 'reconcile'"
+                                t-field="o.writeoff_comment"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="page">
+            <t t-if="o.entry_invoice_ids">
+                <p>
+                    <b>Facturas rectificativas y transacciones de entrada</b>
+                </p>
+                <t t-set="total_original" t-value="0" />
+                <t t-set="total_inicial" t-value="0" />
+                <t t-set="total_asignacion" t-value="0" />
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width: 90px;">Factura</th>
+                            <th>-</th>
+                            <th>Fecha</th>
+                            <th style="width: 90px;">Fecha vencimiento</th>
+                            <th class="text-right">Importe original</th>
+                            <th class="text-right">Saldo inicial</th>
+                            <th class="text-center" style="width: 90px;">
+                                Conciliación completa
+                            </th>
+                            <th class="text-right">Asignación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.entry_invoice_ids" t-as="invoice">
+                            <tr>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="invoice.invoice_id" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="invoice.description" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="invoice.date_original" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="invoice.date_due" />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="invoice.amount_original"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="invoice.amount_unreconciled"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                                <td style="border: none;" class="text-center">
+                                    <i t-if="invoice.reconcile" class="fa fa-check" />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="invoice.amount"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                            <t
+                                t-set="total_original"
+                                t-value="total_original + invoice.amount_original"
+                            />
+                            <t
+                                t-set="total_inicial"
+                                t-value="total_inicial + invoice.amount_unreconciled"
+                            />
+                            <t
+                                t-set="total_asignacion"
+                                t-value="total_asignacion + invoice.amount"
+                            />
+                        </t>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-right">
+                                <b>Total</b>
+                            </td>
+                            <td class="text-right">
+                                <b
+                                    t-out="total_original"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                            <td class="text-right">
+                                <b
+                                    t-out="total_inicial"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                            <td />
+                            <td class="text-right">
+                                <b
+                                    t-out="total_asignacion"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </t>
+            <t t-if="o.entry_refund_ids">
+                <p>
+                    <b>Débitos</b>
+                </p>
+                <t t-set="total_original" t-value="0" />
+                <t t-set="total_inicial" t-value="0" />
+                <t t-set="total_asignacion" t-value="0" />
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width: 90px;">Factura</th>
+                            <th>-</th>
+                            <th>Fecha</th>
+                            <th style="width: 90px;">Fecha vencimiento</th>
+                            <th class="text-right">Importe original</th>
+                            <th class="text-right">Saldo inicial</th>
+                            <th class="text-center" style="width: 90px;">
+                                Conciliación completa
+                            </th>
+                            <th class="text-right">Asignación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.entry_refund_ids" t-as="refund">
+                            <tr>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="refund.invoice_id" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="refund.description" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="refund.date_original" />
+                                </td>
+                                <td style="border: none;" class="text-left">
+                                    <span t-field="refund.date_due" />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="refund.amount_original"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="refund.amount_unreconciled"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                                <td style="border: none;" class="text-center">
+                                    <i t-if="refund.reconcile" class="fa fa-check" />
+                                </td>
+                                <td style="border: none;" class="text-right">
+                                    <span
+                                        t-field="refund.amount"
+                                        t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                            <t
+                                t-set="total_original"
+                                t-value="total_original + refund.amount_original"
+                            />
+                            <t
+                                t-set="total_inicial"
+                                t-value="total_inicial + refund.amount_unreconciled"
+                            />
+                            <t
+                                t-set="total_asignacion"
+                                t-value="total_asignacion + refund.amount"
+                            />
+                        </t>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-right">
+                                <b>Total</b>
+                            </td>
+                            <td class="text-right">
+                                <b
+                                    t-out="total_original"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                            <td class="text-right">
+                                <b
+                                    t-out="total_inicial"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                            <td />
+                            <td class="text-right">
+                                <b
+                                    t-out="total_asignacion"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </t>
+        </div>
+        <div class="footer" />
+    </template>
+    <template id="report_acc_payment">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="account_payment_advanced.report_acc_payment_document" />
+            </t>
+        </t>
+    </template>
+</odoo>

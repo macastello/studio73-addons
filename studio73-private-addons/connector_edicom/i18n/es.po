@@ -1,0 +1,422 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* connector_edicom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-28 07:48+0000\n"
+"PO-Revision-Date: 2024-05-28 07:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: connector_edicom
+#: model:ir.model.fields,help:connector_edicom.field_res_partner__eci_buyer_code
+#: model:ir.model.fields,help:connector_edicom.field_res_users__eci_buyer_code
+msgid ""
+"A la bajada de pedidos ECI se concatenará este valor\n"
+"        con el código del pedido"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__file__cabped
+msgid "CABPED"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_form
+msgid "CANCEL"
+msgstr "CANCELAR"
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_result_form
+msgid "CLOSE"
+msgstr "CERRAR"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__company_id
+msgid "Company"
+msgstr "Compañia"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_comprador
+msgid "Comprador"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_condesp
+msgid "Condiciones especiales de envío"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model,name:connector_edicom.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__create_uid
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__create_uid
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__create_date
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__create_date
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_original_order
+msgid "Código EDI original"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_res_partner__eci_buyer_code
+#: model:ir.model.fields,field_description:connector_edicom.field_res_users__eci_buyer_code
+msgid "Código corto comprador"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__datetime
+msgid "Datetime"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__decimal_length
+msgid "Decimal length"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_depto
+msgid "Departamento"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__display_name
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__display_name
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_res_partner__edicom_ean13
+#: model:ir.model.fields,field_description:connector_edicom.field_res_users__edicom_ean13
+msgid "EAN13"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.res_partner_form_inherit
+msgid "EDI"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.actions.act_window,name:connector_edicom.action_edicom_import_config
+#: model:ir.model,name:connector_edicom.model_edicom_import_config
+#: model_terms:ir.ui.view,arch_db:connector_edicom.edicom_import_config_tree
+msgid "EDI Import Config"
+msgstr "Configuración de importación EDI"
+
+#. module: connector_edicom
+#: model:ir.model,name:connector_edicom.model_edicom_import_config_line
+msgid "EDI Import Config Line"
+msgstr "Configuración de importación de las líneas EDI"
+
+#. module: connector_edicom
+#: model:ir.ui.menu,name:connector_edicom.menu_edicom_import_config_root
+msgid "EDI configuration"
+msgstr "Configuración EDI"
+
+#. module: connector_edicom
+#: model:ir.ui.menu,name:connector_edicom.menu_edicom_import_config
+msgid "EDI import configuration"
+msgstr "Configuración de importación EDI"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_emisor
+msgid "Emisor del mensaje"
+msgstr ""
+
+#. module: connector_edicom
+#. odoo-python
+#: code:addons/connector_edicom/models/edicom_import_configuration.py:0
+#, python-format
+msgid ""
+"Error al importar pedido: No se ha encontrado ningún producto en el sistema "
+"con Barcode (EAN13) %s"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__name
+msgid "Field"
+msgstr "Campo"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__file
+msgid "File"
+msgstr "Archivo"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__file
+msgid "File name"
+msgstr "Nombre del Archivo"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__filename
+msgid "Filename"
+msgstr "Nombre del Archivo"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__dir
+msgid "Files dir"
+msgstr "Directorio de los Archivos"
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__float
+msgid "Float"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_funcion
+msgid "Función del pedido"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__id
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__id
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__id
+msgid "ID"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_order_id
+msgid "ID EDI"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_form
+msgid "IMPORT"
+msgstr "IMPORTAR"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__import_config_id
+msgid "Import configuration"
+msgstr "Configuración de Importación"
+
+#. module: connector_edicom
+#: model:ir.ui.menu,name:connector_edicom.menu_sale_order_import_edicom
+msgid "Import from EDI"
+msgstr "Importar desde EDI"
+
+#. module: connector_edicom
+#: model:ir.actions.act_window,name:connector_edicom.action_sale_order_import_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_form
+msgid "Import orders from EDI"
+msgstr "Importar pedidos desde EDI"
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__integer
+msgid "Integer"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_res_partner__is_remote_sale
+#: model:ir.model.fields,field_description:connector_edicom.field_res_users__is_remote_sale
+msgid "Is a remote sale?"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__file__linped
+msgid "LINPED"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__file__loclped
+msgid "LOCLPED"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config____last_update
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line____last_update
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__write_uid
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__write_uid
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__write_date
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__write_date
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__dimension
+msgid "Length"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__config_line_ids
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__line_ids
+msgid "Lines"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__m2m
+msgid "Many2many"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__m2o
+msgid "Many2one"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: connector_edicom
+#. odoo-python
+#: code:addons/connector_edicom/models/edicom_import_configuration.py:0
+#, python-format
+msgid ""
+"No se ha encontrado ningún cliente/dirección para el campo %s, el EAN13 "
+"recibido es %s"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__file__obslped
+msgid "OBSLPED"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__file__obsped
+msgid "OBSPED"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__field_name
+msgid "Odoo field"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__type
+msgid "Odoo field type"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__model
+msgid "Odoo model"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__line_id
+msgid "Parent line"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_form
+msgid "Please, select the Sales Team"
+msgstr "Por favor, seleccione un Equipo de Ventas"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__result
+msgid "Result"
+msgstr "Resultado"
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_result_form
+msgid "Resultado"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model,name:connector_edicom.model_sale_order_import_edicom
+msgid "Sale Order Import EDI"
+msgstr "Importar orden de compra EDI"
+
+#. module: connector_edicom
+#: model:ir.model,name:connector_edicom.model_sale_order
+msgid "Sales Order"
+msgstr "Orden de compra"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order_import_edicom__sale_team_id
+msgid "Sales Team"
+msgstr "Equipo de Ventas"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__search_field
+msgid "Search field"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config_line__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_temporada
+msgid "Temporada EDI"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__text
+msgid "Text"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__edicom_nodo
+msgid "Tipo de pedido"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_result_form
+msgid "VIEW ORDERS"
+msgstr "VER PEDIDOS"
+
+#. module: connector_edicom
+#: model:ir.model.fields.selection,name:connector_edicom.selection__edicom_import_config_line__type__valp
+msgid "Valores permitidos"
+msgstr ""
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_edicom_import_config__version
+msgid "Version"
+msgstr ""
+
+#. module: connector_edicom
+#: model_terms:ir.ui.view,arch_db:connector_edicom.sale_order_import_edicom_form
+msgid ""
+"With this wizard you can import orders from the EDI\n"
+"                    interface. Use the field below to select the saleteam:"
+msgstr ""
+"Con este asistente puede importar pedidos desde EDICOM\n"
+"                    Utilize el campo inferior para selecionar el Equipo de Ventas:"
+
+#. module: connector_edicom
+#: model:ir.model.fields,field_description:connector_edicom.field_sale_order__is_remote_sale
+msgid "¿Es una venta a distancia?"
+msgstr ""

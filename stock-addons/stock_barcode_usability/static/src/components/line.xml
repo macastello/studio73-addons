@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="stock_barcode.LineQuantity" t-inherit-mode="extension">
+        <xpath
+            expr="//span[hasclass('o_picking_label')]//ancestor::div"
+            position="attributes"
+        >
+            <attribute name="t-if">displayPicking</attribute>
+        </xpath>
+    </t>
+</templates>

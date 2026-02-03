@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_report_to_printer_zpl
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-08 10:49+0000\n"
+"PO-Revision-Date: 2023-02-08 10:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_report_to_printer_zpl
+#: model:ir.model.fields,help:base_report_to_printer_zpl.field_ir_actions_report__print_as_zpl
+msgid ""
+"If the report of Type Text is a ZPL label, this checkbox needs to be checked"
+" to print it correctly. Otherwise it will print the actual ZPL code on the "
+"label."
+msgstr ""
+"Si el informe de Tipo Texto es una etiqueta ZPL, esta casilla debe estar marcada "
+"para imprimirlo correctamente. De lo contrario, imprimirá el código ZPL como texto "
+"en la etiqueta."
+
+#. module: base_report_to_printer_zpl
+#: model:ir.model.fields,field_description:base_report_to_printer_zpl.field_ir_actions_report__print_as_zpl
+msgid "Print as ZPL"
+msgstr "Imprimir en ZPL"
+
+#. module: base_report_to_printer_zpl
+#: model:ir.model,name:base_report_to_printer_zpl.model_printing_printer
+msgid "Printer"
+msgstr "Impresora"
+
+#. module: base_report_to_printer_zpl
+#: model:ir.model,name:base_report_to_printer_zpl.model_ir_actions_report
+msgid "Report Action"
+msgstr "Acción de informe"

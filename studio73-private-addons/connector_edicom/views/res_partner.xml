@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page string="EDI" name="edicom">
+                    <group>
+                        <group>
+                            <field name="edicom_ean13" />
+                            <field name="eci_buyer_code" />
+                            <field name="edicom_export_invoice_path" />
+                        </group>
+                        <group />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

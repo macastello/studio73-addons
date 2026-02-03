@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_package_dimension_extension
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-08 09:29+0000\n"
+"PO-Revision-Date: 2021-11-08 09:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__gross_weight
+msgid "Gross weight"
+msgstr "Peso bruto"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__height
+msgid "Height"
+msgstr "Altura"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__pack_length
+msgid "Length"
+msgstr "Largo"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__net_weight
+msgid "Net weight"
+msgstr "Peso neto"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model,name:stock_quant_package_dimension_extension.model_stock_quant_package
+msgid "Packages"
+msgstr "Paquetes"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,help:stock_quant_package_dimension_extension.field_stock_quant_package__height
+msgid "The height of the package"
+msgstr "La altura del paquete"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,help:stock_quant_package_dimension_extension.field_stock_quant_package__pack_length
+msgid "The length of the package"
+msgstr "La longitud del paquete"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,help:stock_quant_package_dimension_extension.field_stock_quant_package__volume
+msgid "The volume of the package"
+msgstr "El volumen del paquete"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,help:stock_quant_package_dimension_extension.field_stock_quant_package__width
+msgid "The width of the package"
+msgstr "El ancho del paquete"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model,name:stock_quant_package_dimension_extension.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_picking__volume
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__volume
+msgid "Volume"
+msgstr "Volumen"
+
+#. module: stock_quant_package_dimension_extension
+#: model:ir.model.fields,field_description:stock_quant_package_dimension_extension.field_stock_quant_package__width
+msgid "Width"
+msgstr "Ancho"

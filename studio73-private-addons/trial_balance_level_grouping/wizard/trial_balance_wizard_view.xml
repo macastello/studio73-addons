@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="trial_balance_report_wizard_level" model="ir.ui.view">
+        <field name="name">trial.balance.report.wizard.level</field>
+        <field name="model">trial.balance.report.wizard</field>
+        <field name="inherit_id" ref="account_financial_report.trial_balance_wizard" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_partner_details']" position="after">
+                <field name="level" />
+            </xpath>
+            <xpath expr="//field[@name='date_range_id']" position="before">
+                <field name="print_date" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_ir_cron_trigger_group_user_cron","ir_cron_trigger group_user_cron","base.model_ir_cron_trigger","base.group_user",1,0,0,0
+"access_ir_cron_trigger_group_invoice_cron","ir_cron_trigger group_invoice_cron","base.model_ir_cron_trigger","account.group_account_invoice",1,0,1,0

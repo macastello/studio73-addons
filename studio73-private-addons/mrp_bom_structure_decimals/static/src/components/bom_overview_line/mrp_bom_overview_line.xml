@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<templates xml:space="preserve">
+    <tr
+        t-name="BomOverviewLine"
+        t-inherit="mrp.BomOverviewLine"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//span[contains(@t-esc, 'prod_cost')]" position="attributes">
+            <attribute name="t-esc">
+                formatFloat(data.prod_cost, {'digits': [false, data.precision_digits]})
+            </attribute>
+        </xpath>
+        <xpath expr="//span[contains(@t-esc, 'prod_cost')]" position="after">
+            <t t-esc="' €'" />
+        </xpath>
+        <xpath expr="//td[contains(@t-esc, 'bom_cost')]" position="replace">
+            <td
+                t-if="showCosts"
+                t-attf-class="text-end {{ data.type == 'component' ? 'opacity-50' : '' }}"
+            >
+                <t
+                    t-esc="formatFloat(data.bom_cost, {'digits': [false, data.precision_digits]})"
+                />
+                <t t-esc="' €'" />
+            </td>
+        </xpath>
+    </tr>
+</templates>

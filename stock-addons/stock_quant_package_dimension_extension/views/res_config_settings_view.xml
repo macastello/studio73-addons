@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_stock" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.stock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='manage_product_packaging']" position="after">
+                <setting id="manage_packaging_volume">
+                    <field name="package_volume_from_products" />
+                    <div class="text-muted">
+                        Si este check esta marcado, al poner en un paquete los productos
+                        del albarán, las dimensiones del paquete se calculará en base a
+                        las dimensiones de cada uno de estos productos.
+                    </div>
+                </setting>
+            </xpath>
+            <xpath expr="//app[@name='stock']" position="inside">
+                <block title="Paquetes">
+                    <setting id="default_package_types">
+                        <field name="package_type_id" />
+                        <div class="text-muted">
+                            Tipo asignado por defecto a nuevos paquetes
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_config_settings_view_form_inherit_purchase" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.purchase</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="purchase.res_config_settings_view_form_purchase"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='stock_packaging_purchase']" position="inside">
+                <field
+                    name="force_qty_from_package"
+                    invisible="not group_stock_packaging"
+                />
+                <div class="content-group" invisible="not group_stock_packaging">
+                    <label for="force_qty_from_package" />
+                    <div class="text-muted">
+                        Si se marca este check, la cantidad en las lineas del pedido
+                        de compra se recalculará siempre para que sea multiplo del
+                        empaquetado asignado.
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

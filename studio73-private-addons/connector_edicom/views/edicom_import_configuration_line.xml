@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_form_edicom_import_configuration_line" model="ir.ui.view">
+        <field name="name">edicom.import.config.line.form</field>
+        <field name="model">edicom.import.config.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sequence" />
+                        <field name="name" />
+                        <field name="field_name" />
+                        <field name="type" />
+                        <field name="model" />
+                        <field name="search_field" />
+                        <field name="file" />
+                        <field name="decimal_length" />
+                        <field name="dimension" />
+                        <field name="description" />
+                        <field name="import_config_id" />
+                        <field name="line_id" />
+                        <field name="line_ids" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_tree_edicom_import_configuration_line" model="ir.ui.view">
+        <field name="name">edicom.import.configuration.line.tree</field>
+        <field name="model">edicom.import.config.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" />
+                <field name='file' />
+                <field name="name" />
+                <field name='field_name' />
+                <field name="decimal_length" />
+                <field name="dimension" />
+                <field name='model' optional='hide' />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View  -->
+    <record id="edicom_import_configuration_view_search" model="ir.ui.view">
+        <field name="name">edicom.import.configuration.view.search</field>
+        <field name="model">edicom.import.config.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="field_name" />
+                <group name="groupby" expand="1" string="Group By">
+                    <filter name="files" string="Files" context="{'group_by':'file'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_edicom_import_configuration_line" model="ir.actions.act_window">
+        <field name="name">Líneas configuración importación pedidos EDI</field>
+        <field name="res_model">edicom.import.config.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_tree_edicom_import_configuration_line" />
+        <field name="context">{'search_default_group_file': 1}</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_edicom_configuration"
+        name="EDI"
+        sequence="99"
+        parent="base.menu_custom"
+    />
+    <menuitem
+        id="menu_edicom_import_configuration_line"
+        name="Líneas configuración importación pedidos EDI"
+        parent="menu_edicom_configuration"
+        action="action_edicom_import_configuration_line"
+    />
+</odoo>

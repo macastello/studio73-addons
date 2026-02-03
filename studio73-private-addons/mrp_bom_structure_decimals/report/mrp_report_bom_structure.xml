@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_mrp_bom" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//tbody//td[contains(@t-esc, 'prod_cost')]" position="replace">
+            <td class="text-end">
+                <span t-if="data['show_costs']">
+                    <t
+                        t-esc="data['prod_cost']"
+                        t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                    />
+                    €
+                </span>
+            </td>
+        </xpath>
+        <xpath expr="//tbody//td[contains(@t-esc, 'bom_cost')]" position="replace">
+            <td class="text-end">
+                <span t-if="data['show_costs']">
+                    <t
+                        t-esc="data['bom_cost']"
+                        t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                    />
+                    €
+                </span>
+            </td>
+        </xpath>
+        <xpath
+            expr="//tfoot/tr[contains(@t-if, 'show_costs')]//td[contains(@t-esc, 'prod_cost')]"
+            position="replace"
+        >
+            <td class="text-end">
+                <t
+                    t-esc="data['prod_cost'] / (data['quantity'] or 1)"
+                    t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                />
+                €
+            </td>
+        </xpath>
+        <xpath
+            expr="//tfoot/tr[contains(@t-if, 'show_costs')]//td[contains(@t-esc, 'bom_cost')]"
+            position="replace"
+        >
+            <td class="text-end">
+                <t
+                    t-esc="data['bom_cost'] / (data['quantity'] or 1)"
+                    t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                />
+                €
+            </td>
+        </xpath>
+        <xpath
+            expr="//tfoot/t[contains(@t-foreach, 'byproducts')]//td[contains(@t-esc, 'prod_cost')]"
+            position="replace"
+        >
+            <td class="text-end">
+                <t
+                    t-esc="byproduct['prod_cost'] / (byproduct['quantity'] or 1)"
+                    t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                />
+                €
+            </td>
+        </xpath>
+        <xpath
+            expr="//tfoot/t[contains(@t-foreach, 'byproducts')]//td[contains(@t-esc, 'bom_cost')]"
+            position="replace"
+        >
+            <td class="text-end">
+                <t
+                    t-esc="byproduct['bom_cost'] / (byproduct['quantity'] or 1)"
+                    t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                />
+                €
+            </td>
+        </xpath>
+    </template>
+    <template id="report_mrp_bom_pdf_line" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <xpath
+            expr="//t[@t-as='l']//td[contains(@t-esc, 'bom_cost')]"
+            position="replace"
+        >
+            <td
+                t-attf-class="text-end {{ 'text-muted' if l['type'] == 'component' else '' }}"
+            >
+                <span t-if="data['show_costs']">
+                    <t
+                        t-esc="l['bom_cost']"
+                        t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                    />
+                    €
+                </span>
+            </td>
+        </xpath>
+        <xpath
+            expr="//t[@t-as='l']//td/span[contains(@t-esc, 'prod_cost')]"
+            position="replace"
+        >
+            <span>
+                <t
+                    t-if="'prod_cost' in l"
+                    t-esc="l['prod_cost']"
+                    t-options='{"widget": "float","decimal_precision": "Lista Materiales Costes"}'
+                />
+                <t t-if="'prod_cost' in l">€</t>
+            </span>
+        </xpath>
+    </template>
+    <template id="report_bom_structure" inherit_id="mrp.report_bom_structure">
+        <xpath expr="//t[@t-set='data_report_landscape']" position="attributes">
+            <attribute name="t-value">False</attribute>
+        </xpath>
+    </template>
+</odoo>

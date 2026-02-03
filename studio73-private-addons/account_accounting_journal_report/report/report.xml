@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="paperformat_account_accounting_journal_report"
+        model="report.paperformat"
+    >
+        <field name="name">Account accounting journal format</field>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">8</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+    <!-- prettier-ignore-start -->
+    <record id="report_acc_accounting_journal" model="ir.actions.report">
+        <field name="name">Informe de diario de contabilidad</field>
+        <field
+            name="paperformat_id"
+            ref="paperformat_account_accounting_journal_report"
+        />
+        <field name="model">account.accounting_journal</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_accounting_journal_report.acc_accounting_journal</field>
+        <field name="report_file">account_accounting_journal_report.acc_accounting_journal</field>
+    </record>
+    <!-- prettier-ignore-end -->
+</odoo>

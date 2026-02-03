@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="paperformat_account_payment_advanced_report" model="report.paperformat">
+        <field name="name">Cobros de clientes</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">55</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="report_acc_paymnt_adv_report" model="ir.actions.report">
+        <field name="name">Cobros de clientes</field>
+        <field
+            name="paperformat_id"
+            ref="paperformat_account_payment_advanced_report"
+        />
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_payment_advanced.acc_paymnt_adv_report</field>
+        <field name="report_file">
+            account_payment_advanced.account_payment_advanced_report
+        </field>
+        <field name="attachment_use" eval="False" />
+    </record>
+</odoo>

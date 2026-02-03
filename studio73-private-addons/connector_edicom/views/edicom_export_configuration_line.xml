@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_form_edicom_export_configuration_line" model="ir.ui.view">
+        <field name="name">edicom.export.configuration.line.form</field>
+        <field name="model">edicom.export.configuration.line</field>
+        <field name="arch" type="xml">
+            <form string="Edicom Export Configuration Line">
+                <sheet>
+                    <group>
+                        <field name="sequence" />
+                        <field name="export_config_id" />
+                        <field name="name" />
+                        <field name="repeat_expression" />
+                        <field name="conditional_expression" />
+                        <field name="sub_config" />
+                        <field name="export_type" />
+                        <field name="apply_sign" />
+                        <field name="positive_sign" />
+                        <field name="negative_sign" />
+                        <field name="size" />
+                        <field name="alignment" />
+                        <field name="bool_no" />
+                        <field name="bool_yes" />
+                        <field name="decimal_size" />
+                        <field name="expression" />
+                        <field name="fixed_value" />
+                        <field name="required" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_tree_edicom_export_configuration_line" model="ir.ui.view">
+        <field name="name">edicom.export.configuration.line.tree</field>
+        <field name="model">edicom.export.configuration.line</field>
+        <field name="arch" type="xml">
+            <tree string="Edicom Export Configuration Line">
+                <field name="sequence" />
+                <field name="export_config_id" />
+                <field name='expression' />
+                <field name="name" />
+                <field name="export_type" />
+                <field name="size" />
+                <field name="required" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_edicom_export_configuration_line" model="ir.actions.act_window">
+        <field name="name">Edicom Export Configuration Lines</field>
+        <field name="res_model">edicom.export.configuration.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_tree_edicom_export_configuration_line" />
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_edicom_export_configuration_line"
+        name="Líneas configuración exportación facturas EDI"
+        parent="connector_edicom.menu_edicom_configuration"
+        action="action_edicom_export_configuration_line"
+    />
+</odoo>

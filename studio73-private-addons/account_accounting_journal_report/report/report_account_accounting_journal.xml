@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="acc_accounting_journal_document">
+        <div class="header" />
+        <t t-set="title">
+            Libro diario -
+            <t t-esc="company.display_name" />
+        </t>
+        <div class="page">
+            <div class="row">
+                <h4 class="col-12 mt0 text-center" t-esc="title or 'Libro diario'" />
+            </div>
+            <t
+                t-call="account_accounting_journal_report.acc_accounting_journal_filters"
+            />
+            <div class="act_as_table list_table" style="margin-top: 10px;" />
+            <div class="act_as_table data_table" style="width: 100%;">
+                <t
+                    t-call="account_accounting_journal_report.acc_accounting_journal_lines_header"
+                />
+                <t t-foreach="docs" t-as="line">
+                    <t t-set="style" t-value="'font-size:8px;'" />
+                    <t
+                        t-call="account_accounting_journal_report.acc_accounting_journal_line"
+                    />
+                </t>
+            </div>
+        </div>
+        <div class="footer" />
+    </template>
+    <template id="acc_accounting_journal">
+        <t t-call="web.html_container">
+            <t t-call="account_financial_report.internal_layout">
+                <t
+                    t-call="account_accounting_journal_report.acc_accounting_journal_document"
+                />
+            </t>
+        </t>
+    </template>
+    <template id="acc_accounting_journal_filters">
+        <div class="act_as_table data_table" style="width: 100%;">
+            <div class="act_as_row labels">
+                <div class="act_as_cell">Fecha desde</div>
+                <div class="act_as_cell">Fecha hasta</div>
+                <div class="act_as_cell">Nivel</div>
+            </div>
+            <div class="act_as_row">
+                <div class="act_as_cell">
+                    <span t-esc="date_from" />
+                </div>
+                <div class="act_as_cell">
+                    <span t-esc="date_to" />
+                </div>
+                <t t-if="not level or level == 99">
+                    <div class="act_as_cell">
+                        <span>Máximo</span>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="act_as_cell">
+                        <span t-esc="level" />
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+    <template id="acc_accounting_journal_lines_header">
+        <div class="act_as_thead">
+            <div class="act_as_row labels">
+                <div class="act_as_cell" style="width: 9%;">Fecha</div>
+                <div class="act_as_cell" style="width: 9%;">Nº Asiento</div>
+                <div class="act_as_cell" style="width: 18%;">Concepto</div>
+                <div class="act_as_cell" style="width: 17%;">Referencia</div>
+                <div class="act_as_cell" style="width: 9%;">Cuenta</div>
+                <div class="act_as_cell" style="width: 18%;">Nombre cuenta</div>
+                <t t-if="include_analytic_account">
+                    <div class="act_as_cell" style="width: 18%;">Cuenta analítica</div>
+                </t>
+                <div class="act_as_cell" style="width: 10%;">Debe</div>
+                <div class="act_as_cell" style="width: 10%;">Haber</div>
+            </div>
+        </div>
+    </template>
+    <template id="acc_accounting_journal_line">
+        <div class="act_as_row lines">
+            <t t-set="fecha" t-value="line['fecha']" />
+            <div class="act_as_cell">
+                <span t-esc="fecha" />
+            </div>
+            <t t-set="num_asiento_ordenado" t-value="line['num_asiento_ordenado']" />
+            <div class="act_as_cell">
+                <span t-esc="num_asiento_ordenado" />
+            </div>
+            <t t-set="concepto" t-value="line['concepto']" />
+            <div class="act_as_cell">
+                <span t-esc="concepto" />
+            </div>
+            <t t-set="referencia" t-value="line['referencia']" />
+            <div class="act_as_cell">
+                <span t-esc="referencia" />
+            </div>
+            <t t-set="cuenta" t-value="line['cuenta']" />
+            <div class="act_as_cell">
+                <span t-esc="cuenta" />
+            </div>
+            <t t-set="nombre_cuenta" t-value="line['nombre_cuenta']" />
+            <div class="act_as_cell">
+                <span t-esc="nombre_cuenta" />
+            </div>
+            <t t-if="include_analytic_account">
+                <t t-set="cuenta_analitica" t-value="line['cuenta_analitica']" />
+                <div class="act_as_cell">
+                    <span t-esc="cuenta_analitica" />
+                </div>
+            </t>
+            <t t-set="debe" t-value="line['debe']" />
+            <div class="act_as_cell amount">
+                <span
+                    t-esc="debe"
+                    t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"
+                />
+            </div>
+            <t t-set="haber" t-value="line['haber']" />
+            <div class="act_as_cell amount">
+                <span
+                    t-esc="haber"
+                    t-options="{'widget': 'monetary', 'display_currency': company.currency_id}"
+                />
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_account_journal_form_inherit" model="ir.ui.view">
+        <field name="name">view.account.journal.form.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='advanced_settings']//group" position="inside">
+                <group string="Accounting App Options">
+                    <field name="for_customer_payments" />
+                    <field
+                        name="payment_mode_id"
+                        options="{'no_create': True, 'no_create_edit': True}"
+                    />
+                </group>
+            </xpath>
+            <xpath
+                expr="//field[@name='default_account_type']/parent::group"
+                position="inside"
+            >
+                <field name="is_defaulting_debtor_journal" />
+                <field
+                    name="credit_impairment_account_id"
+                    invisible="not is_defaulting_debtor_journal"
+                    required="is_defaulting_debtor_journal"
+                />
+                <field
+                    name="debt_provision_account_id"
+                    invisible="not is_defaulting_debtor_journal"
+                    required="is_defaulting_debtor_journal"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

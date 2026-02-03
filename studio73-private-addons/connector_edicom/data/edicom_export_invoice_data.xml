@@ -1,0 +1,2799 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- prettier-ignore-start -->
+    <!--  CABFAC.TXT  -->
+    <record id="edicom_export_invoice_data" model="edicom.export.configuration">
+        <field name="name">Exportacion de facturas a edicom</field>
+        <field name="model" ref="account.model_account_move" />
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_config" model="edicom.export.configuration">
+        <field name="name">
+            2.1. Cabecera y Pie de la Factura (Datos globales a la factura)
+        </field>
+        <field name="model" ref="account.model_account_move" />
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data" />
+        <field name="name">cabfac</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_invoice_data_cabfac_config" />
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">cabfac</field>
+        <field name="fixed_value">cabfac</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMFAC</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">VENDEDOR</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">EMISOR</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">COBRADOR</field>
+        <field name="expression">${object.company_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">COMPRADO</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">DEPTO</field>
+        <field name="expression">${object.mapped('line_ids')[0].edicom_dept if object.line_ids else object.edicom_dept}</field>
+        <field name="export_type">string</field>
+        <field name="size">13</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RECEPTOR</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_shipping_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CLIENTE</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.edicom_partner_id.edicom_ean13 or object.partner_shipping_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PAGADOR</field>
+        <field name="expression">${object.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_11" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PEDIDO</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.mapped('line_ids.sale_line_ids.order_id') and object.mapped('line_ids.sale_line_ids.order_id')[0].client_order_ref or ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_12" model="edicom.export.configuration.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECHA</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.invoice_date}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_13" model="edicom.export.configuration.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NODO</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_14" model="edicom.export.configuration.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FUNCION</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_15" model="edicom.export.configuration.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RSOCIAL</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_16" model="edicom.export.configuration.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALLE</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.street}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_17" model="edicom.export.configuration.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CIUDAD</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.city}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_18" model="edicom.export.configuration.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CP</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.zip}</field>
+        <field name="export_type">string</field>
+        <field name="size">5</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_19" model="edicom.export.configuration.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIF</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.partner_id.vat}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_20" model="edicom.export.configuration.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RAZON</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_21" model="edicom.export.configuration.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ALBARAN</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.mapped('line_ids.sale_line_ids.order_id')[0].picking_ids and object.mapped('line_ids.sale_line_ids.order_id')[0].picking_ids[0].name or '' if object.line_ids.sale_line_ids.order_id else ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_22" model="edicom.export.configuration.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CONTRATO</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_23" model="edicom.export.configuration.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NFACSUS</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_24" model="edicom.export.configuration.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FPAG</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_25" model="edicom.export.configuration.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">DIVISA</field>
+        <field name="fixed_value">EUR</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_26" model="edicom.export.configuration.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SUMBRUTO</field>
+        <field name="expression">${object.amount_untaxed}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_27" model="edicom.export.configuration.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SUMNETOS</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_untaxed}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_28" model="edicom.export.configuration.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CARGOS</field>
+        <field name="expression"></field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_29" model="edicom.export.configuration.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">DESCUEN</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.global_discount_ids[0].discount if object.global_discount_ids else 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_30" model="edicom.export.configuration.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP1</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_untaxed}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_31" model="edicom.export.configuration.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP1</field>
+        <field name="export_type">string</field>
+        <field name="expression"></field>
+        <field name="fixed_value">VAT</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_32" model="edicom.export.configuration.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP1</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.invoice_line_ids and object.invoice_line_ids[0] and object.invoice_line_ids[0].tax_ids and object.invoice_line_ids[0].tax_ids[0].amount or 0.0}</field>
+        <field name="export_type">float</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_33" model="edicom.export.configuration.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP1</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_tax}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_34" model="edicom.export.configuration.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_35" model="edicom.export.configuration.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_36" model="edicom.export.configuration.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_37" model="edicom.export.configuration.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_38" model="edicom.export.configuration.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_39" model="edicom.export.configuration.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_40" model="edicom.export.configuration.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_41" model="edicom.export.configuration.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_42" model="edicom.export.configuration.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_43" model="edicom.export.configuration.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_44" model="edicom.export.configuration.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP4</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_45" model="edicom.export.configuration.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_46" model="edicom.export.configuration.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP5</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_47" model="edicom.export.configuration.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP5</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_48" model="edicom.export.configuration.line">
+        <field name="sequence">47</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP5</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_49" model="edicom.export.configuration.line">
+        <field name="sequence">48</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP5</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_50" model="edicom.export.configuration.line">
+        <field name="sequence">49</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMP6</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_51" model="edicom.export.configuration.line">
+        <field name="sequence">50</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMP6</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_52" model="edicom.export.configuration.line">
+        <field name="sequence">51</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMP6</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_53" model="edicom.export.configuration.line">
+        <field name="sequence">52</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMP6</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_54" model="edicom.export.configuration.line">
+        <field name="sequence">53</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASIMPFA</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_untaxed}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_55" model="edicom.export.configuration.line">
+        <field name="sequence">54</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TOTIMP</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_tax}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_56" model="edicom.export.configuration.line">
+        <field name="sequence">55</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TOTAL</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_total}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_57" model="edicom.export.configuration.line">
+        <field name="sequence">56</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">VTO1</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.invoice_date_due}</field>
+        <field name="export_type">date</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_58" model="edicom.export.configuration.line">
+        <field name="sequence">57</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPVTO1</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.amount_total}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_59" model="edicom.export.configuration.line">
+        <field name="sequence">58</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">VTO2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_60" model="edicom.export.configuration.line">
+        <field name="sequence">59</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPVTO2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_61" model="edicom.export.configuration.line">
+        <field name="sequence">60</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">VTO3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_62" model="edicom.export.configuration.line">
+        <field name="sequence">61</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPVTO3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_63" model="edicom.export.configuration.line">
+        <field name="sequence">62</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TPVERDE</field>
+        <field name="required" eval="True" />
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_64" model="edicom.export.configuration.line">
+        <field name="sequence">63</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALIF1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_65" model="edicom.export.configuration.line">
+        <field name="sequence">64</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SECUEN1</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_66" model="edicom.export.configuration.line">
+        <field name="sequence">65</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPO1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_67" model="edicom.export.configuration.line">
+        <field name="sequence">66</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCEN1</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_68" model="edicom.export.configuration.line">
+        <field name="sequence">67</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIDES1</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_69" model="edicom.export.configuration.line">
+        <field name="sequence">68</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALIF2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_70" model="edicom.export.configuration.line">
+        <field name="sequence">69</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SECUEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_71" model="edicom.export.configuration.line">
+        <field name="sequence">70</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPO2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_72" model="edicom.export.configuration.line">
+        <field name="sequence">71</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_73" model="edicom.export.configuration.line">
+        <field name="sequence">72</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIDES2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_74" model="edicom.export.configuration.line">
+        <field name="sequence">73</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALIF3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_75" model="edicom.export.configuration.line">
+        <field name="sequence">74</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SECUEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_76" model="edicom.export.configuration.line">
+        <field name="sequence">75</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPO3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_77" model="edicom.export.configuration.line">
+        <field name="sequence">76</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_78" model="edicom.export.configuration.line">
+        <field name="sequence">77</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIDES3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_79" model="edicom.export.configuration.line">
+        <field name="sequence">78</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALIF4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_80" model="edicom.export.configuration.line">
+        <field name="sequence">79</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SECUEN4</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_81" model="edicom.export.configuration.line">
+        <field name="sequence">80</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPO4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_82" model="edicom.export.configuration.line">
+        <field name="sequence">81</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCEN4</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_83" model="edicom.export.configuration.line">
+        <field name="sequence">82</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIDES4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_84" model="edicom.export.configuration.line">
+        <field name="sequence">83</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CALIF5</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_85" model="edicom.export.configuration.line">
+        <field name="sequence">84</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SECUEN5</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_86" model="edicom.export.configuration.line">
+        <field name="sequence">85</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPO5</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_87" model="edicom.export.configuration.line">
+        <field name="sequence">86</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCEN5</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_88" model="edicom.export.configuration.line">
+        <field name="sequence">87</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIDES5</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_89" model="edicom.export.configuration.line">
+        <field name="sequence">88</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ERSOCIAL</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_90" model="edicom.export.configuration.line">
+        <field name="sequence">89</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ECALLE</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.street}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_91" model="edicom.export.configuration.line">
+        <field name="sequence">90</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">EPOBLAC</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.city}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_92" model="edicom.export.configuration.line">
+        <field name="sequence">91</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ECP</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.company_id.partner_id.zip}</field>
+        <field name="export_type">string</field>
+        <field name="size">5</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_93" model="edicom.export.configuration.line">
+        <field name="sequence">92</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ENIF</field>
+        <field name="required" eval="True" />
+        <field name="expression">${(object.company_id.partner_id.vat)[2:]}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_94" model="edicom.export.configuration.line">
+        <field name="sequence">93</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ERMERCA</field>
+        <field name="required" eval="True" />
+        <field name="fixed_value" >Inscrita en el Registro Mercantil de Alicante, Tomo 2283, Libro 0, Fol</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_95" model="edicom.export.configuration.line">
+        <field name="sequence">94</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NOTAC</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_96" model="edicom.export.configuration.line">
+        <field name="sequence">95</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMREL</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_97" model="edicom.export.configuration.line">
+        <field name="sequence">96</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RECOGIDA</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_98" model="edicom.export.configuration.line">
+        <field name="sequence">97</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">DESTINO</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_99" model="edicom.export.configuration.line">
+        <field name="sequence">98</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECHAEFE</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.invoice_date}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_100" model="edicom.export.configuration.line">
+        <field name="sequence">99</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NCONFREC</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_101" model="edicom.export.configuration.line">
+        <field name="sequence">100</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIDENTICKET</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_102" model="edicom.export.configuration.line">
+        <field name="sequence">101</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CONTACTO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_103" model="edicom.export.configuration.line">
+        <field name="sequence">102</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TELEFONO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_104" model="edicom.export.configuration.line">
+        <field name="sequence">103</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FAX</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_105" model="edicom.export.configuration.line">
+        <field name="sequence">104</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CODPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_106" model="edicom.export.configuration.line">
+        <field name="sequence">105</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECALB</field>
+        <field name="expression">${object.delivery_date if object.delivery_date else object.invoice_date}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_107" model="edicom.export.configuration.line">
+        <field name="sequence">106</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN1</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_108" model="edicom.export.configuration.line">
+        <field name="sequence">107</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_109" model="edicom.export.configuration.line">
+        <field name="sequence">108</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_110" model="edicom.export.configuration.line">
+        <field name="sequence">109</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN4</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_111" model="edicom.export.configuration.line">
+        <field name="sequence">110</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN5</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_112" model="edicom.export.configuration.line">
+        <field name="sequence">111</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NORMEXEN6</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_113" model="edicom.export.configuration.line">
+        <field name="sequence">112</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECHADOC</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_114" model="edicom.export.configuration.line">
+        <field name="sequence">113</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">REFPAGO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_115" model="edicom.export.configuration.line">
+        <field name="sequence">114</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ORIGEN</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_116" model="edicom.export.configuration.line">
+        <field name="sequence">115</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIFII</field>
+        <!-- <field name="expression">${(object.company_id.vat)[2:] if object.company_id.vat else ''}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_117" model="edicom.export.configuration.line">
+        <field name="sequence">116</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIFPE</field>
+        <!-- <field name="expression">${(object.partner_id.vat)[2:] if object.partner_id.vat else ''}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_118" model="edicom.export.configuration.line">
+        <field name="sequence">117</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIFIV</field>
+        <!-- <field name="expression">${(object.partner_id.vat)[2:] if object.partner_id.vat else ''}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_119" model="edicom.export.configuration.line">
+        <field name="sequence">118</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIFPR</field>
+        <!-- <field name="expression">${(object.partner_id.vat)[2:] if object.partner_id.vat else ''}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_120" model="edicom.export.configuration.line">
+        <field name="sequence">119</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NIFSU</field>
+        <!-- <field name="expression">${(object.partner_shipping_id.vat)[2:] if object.partner_shipping_id else ''}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_121" model="edicom.export.configuration.line">
+        <field name="sequence">120</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMMOVI</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_122" model="edicom.export.configuration.line">
+        <field name="sequence">121</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMINCOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_123" model="edicom.export.configuration.line">
+        <field name="sequence">122</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPINCOR</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_124" model="edicom.export.configuration.line">
+        <field name="sequence">123</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FENTMER</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_125" model="edicom.export.configuration.line">
+        <field name="sequence">124</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FEMIMEN</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_126" model="edicom.export.configuration.line">
+        <field name="sequence">125</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMMEN</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_127" model="edicom.export.configuration.line">
+        <field name="sequence">126</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PERCFAC</field>
+        <field name="export_type">string</field>
+        <field name="size">16</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_128" model="edicom.export.configuration.line">
+        <field name="sequence">127</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FPEDIDO</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_129" model="edicom.export.configuration.line">
+        <field name="sequence">128</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CODAPROB</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_130" model="edicom.export.configuration.line">
+        <field name="sequence">129</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMDEVOL</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_131" model="edicom.export.configuration.line">
+        <field name="sequence">130</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FNUMDEVOL</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_132" model="edicom.export.configuration.line">
+        <field name="sequence">131</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NOTIFDEVOL</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_133" model="edicom.export.configuration.line">
+        <field name="sequence">132</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FNOTIFDEVOL</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_134" model="edicom.export.configuration.line">
+        <field name="sequence">133</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">SEDESOC</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_135" model="edicom.export.configuration.line">
+        <field name="sequence">134</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BUQUE</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_136" model="edicom.export.configuration.line">
+        <field name="sequence">135</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FEMBARQUE</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_137" model="edicom.export.configuration.line">
+        <field name="sequence">136</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FORWARDER</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_138" model="edicom.export.configuration.line">
+        <field name="sequence">137</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RRSOCIAL</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_139" model="edicom.export.configuration.line">
+        <field name="sequence">138</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RCALLE</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_140" model="edicom.export.configuration.line">
+        <field name="sequence">139</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RCIUDAD</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_141" model="edicom.export.configuration.line">
+        <field name="sequence">140</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RCP</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_142" model="edicom.export.configuration.line">
+        <field name="sequence">141</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">AGENENIF</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_143" model="edicom.export.configuration.line">
+        <field name="sequence">142</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ECAPSOCIAL</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_144" model="edicom.export.configuration.line">
+        <field name="sequence">143</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">LUGCARGA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_145" model="edicom.export.configuration.line">
+        <field name="sequence">144</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FCARGA</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_146" model="edicom.export.configuration.line">
+        <field name="sequence">145</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">LUGDESCARGA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_147" model="edicom.export.configuration.line">
+        <field name="sequence">146</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">MATRICULA</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_148" model="edicom.export.configuration.line">
+        <field name="sequence">147</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_149" model="edicom.export.configuration.line">
+        <field name="sequence">148</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMVEN</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_150" model="edicom.export.configuration.line">
+        <field name="sequence">149</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">CPTEXT</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_151" model="edicom.export.configuration.line">
+        <field name="sequence">150</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">ECPTEXT</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_152" model="edicom.export.configuration.line">
+        <field name="sequence">151</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECFACSUS</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_153" model="edicom.export.configuration.line">
+        <field name="sequence">152</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">EPAIS</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_154" model="edicom.export.configuration.line">
+        <field name="sequence">153</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">RELVTO</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_155" model="edicom.export.configuration.line">
+        <field name="sequence">154</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">DIASVTO</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_156" model="edicom.export.configuration.line">
+        <field name="sequence">155</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PORCVTO</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_157" model="edicom.export.configuration.line">
+        <field name="sequence">156</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMPDES1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_158" model="edicom.export.configuration.line">
+        <field name="sequence">157</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMPDES1</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_159" model="edicom.export.configuration.line">
+        <field name="sequence">158</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMPDES1</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_160" model="edicom.export.configuration.line">
+        <field name="sequence">159</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMPDES1</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_161" model="edicom.export.configuration.line">
+        <field name="sequence">160</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMPDES2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_162" model="edicom.export.configuration.line">
+        <field name="sequence">161</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMPDES2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_163" model="edicom.export.configuration.line">
+        <field name="sequence">162</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMPDES2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_164" model="edicom.export.configuration.line">
+        <field name="sequence">163</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMPDES2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_165" model="edicom.export.configuration.line">
+        <field name="sequence">164</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMPDES3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_166" model="edicom.export.configuration.line">
+        <field name="sequence">165</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMPDES3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_167" model="edicom.export.configuration.line">
+        <field name="sequence">166</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMPDES3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_168" model="edicom.export.configuration.line">
+        <field name="sequence">167</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMPDES3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_169" model="edicom.export.configuration.line">
+        <field name="sequence">168</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMPDES4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_170" model="edicom.export.configuration.line">
+        <field name="sequence">169</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMPDES4</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_171" model="edicom.export.configuration.line">
+        <field name="sequence">170</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMPDES4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_172" model="edicom.export.configuration.line">
+        <field name="sequence">171</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMPDES4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_173" model="edicom.export.configuration.line">
+        <field name="sequence">172</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TIPOIMPDES5</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_174" model="edicom.export.configuration.line">
+        <field name="sequence">173</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TASAIMPDES5</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_175" model="edicom.export.configuration.line">
+        <field name="sequence">174</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">IMPIMPDES5</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_176" model="edicom.export.configuration.line">
+        <field name="sequence">175</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">BASEIMPDES5</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_177" model="edicom.export.configuration.line">
+        <field name="sequence">176</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">PAISBY</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_178" model="edicom.export.configuration.line">
+        <field name="sequence">177</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">REGCRITCAJA</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_179" model="edicom.export.configuration.line">
+        <field name="sequence">178</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_180" model="edicom.export.configuration.line">
+        <field name="sequence">179</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_181" model="edicom.export.configuration.line">
+        <field name="sequence">180</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_182" model="edicom.export.configuration.line">
+        <field name="sequence">181</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_183" model="edicom.export.configuration.line">
+        <field name="sequence">182</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_184" model="edicom.export.configuration.line">
+        <field name="sequence">183</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT5</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_185" model="edicom.export.configuration.line">
+        <field name="sequence">184</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">TAXCAT6</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_186" model="edicom.export.configuration.line">
+        <field name="sequence">185</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">AUTORIZDEV</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_187" model="edicom.export.configuration.line">
+        <field name="sequence">186</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">NUMPEDVEND</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_cabfac_line_188" model="edicom.export.configuration.line">
+        <field name="sequence">187</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">FECTAX</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!--  OBSFAC.TXT  -->
+    <record id="edicom_export_invoice_data_obsfac_config" model="edicom.export.configuration">
+        <field name="name">2.2. Observaciones globales a la Factura</field>
+        <field name="model" ref="account.model_account_move" />
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data" />
+        <field name="name">obsfact</field>
+        <field name="export_type">subconfig</field>
+        <field name="conditional_expression">${object.narration}</field>
+        <field name="sub_config" ref="edicom_export_invoice_data_obsfac_config" />
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_0" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">obsfac</field>
+        <field name="fixed_value">obsfac</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">OBSFAC</field>
+        <field name="fixed_value">OBSFAC</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">NUMFAC</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">NUMLIN</field>
+        <field name="required" eval="True" />
+        <field name="apply_sign" eval="False" />
+        <field name="fixed_value">1</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">TEMA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">TEXTO</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.narration}</field>
+        <field name="export_type">string</field>
+        <field name="size">350</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_obsfac_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_obsfac_config" />
+        <field name="name">IDIOMA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!--  LINFAC.TXT  -->
+    <record id="edicom_export_invoice_data_linfac_config" model="edicom.export.configuration">
+        <field name="name">2.5. Detalle de la Factura</field>
+        <field name="model" ref="account.model_account_move_line" />
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_cabfac_config" />
+        <field name="name">linfac</field>
+        <field name="fixed_value">linfac</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data" />
+        <field name="name">linfac</field>
+        <field name="export_type">subconfig</field>
+        <field name="expression">object.invoice_line_ids.filtered(lambda line: line.display_type == "product")</field>
+        <field name="repeat_expression">object.invoice_line_ids.filtered(lambda line: line.display_type == "product")</field>
+        <field name="sub_config" ref="edicom_export_invoice_data_linfac_config" />
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">LINFAC</field>
+        <field name="fixed_value">LINFAC</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NUMFAC</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.move_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NUMLIN</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.sequence+1}</field>
+        <field name="export_type">float</field>
+        <field name="size">5</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">REFEAN</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.product_id.barcode[:13] if object.product_id.barcode else ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">REFCLI</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">REFPRO</field>
+        <field name="expression">${object.product_id.default_code}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">VP</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CÓDIGO DUN14</field>
+        <field name="export_type">string</field>
+        <field name="size">14</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">DESC</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CFACT</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.quantity}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_11" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CENT</field>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_12" model="edicom.export.configuration.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">UMEDIDA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_13" model="edicom.export.configuration.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PRECIOB</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.price_unit}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_14" model="edicom.export.configuration.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PRECION</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.price_unit}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_15" model="edicom.export.configuration.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPOIMP1</field>
+        <field name="export_type">string</field>
+        <field name="expression"></field>
+        <field name="fixed_value">VAT</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_16" model="edicom.export.configuration.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TASAIMP1</field>
+        <field name="export_type">float</field>
+        <field name='expression'>${0 if not object.tax_ids[0].amount else object.tax_ids[0].amount}</field>
+        <field name="required" eval="True" />
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_17" model="edicom.export.configuration.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPTASA1</field>
+        <field name="export_type">float</field>
+        <field name='expression'>${0.0 if not object.move_id.partner_id.country_id.code == 'ES' else round(object.price_subtotal * object.tax_ids[0].amount / 100, 2)}</field>
+        <field name="required" eval="True" />
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_18" model="edicom.export.configuration.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPOIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_19" model="edicom.export.configuration.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TASAIMP2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_20" model="edicom.export.configuration.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPTASA2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_21" model="edicom.export.configuration.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPOIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_22" model="edicom.export.configuration.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TASAIMP3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_23" model="edicom.export.configuration.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPTASA3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_24" model="edicom.export.configuration.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CALIF1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_25" model="edicom.export.configuration.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SECUEN1</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_26" model="edicom.export.configuration.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPO1</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_27" model="edicom.export.configuration.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PORCEN1</field>
+        <!-- <field name='expression'>${object.discount if object.discount else 0}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_28" model="edicom.export.configuration.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPDTO1</field>
+        <!-- <field name='expression'>${object.price_subtotal * object.discount / 100 if object.discount else 0}</field> -->
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_29" model="edicom.export.configuration.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CALIF2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_30" model="edicom.export.configuration.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SECUEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_31" model="edicom.export.configuration.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPO2</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_32" model="edicom.export.configuration.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PORCEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_33" model="edicom.export.configuration.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPDTO2</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_34" model="edicom.export.configuration.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CALIF3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_35" model="edicom.export.configuration.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SECUEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_36" model="edicom.export.configuration.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPO3</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_37" model="edicom.export.configuration.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PORCEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_38" model="edicom.export.configuration.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPDTO3</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_39" model="edicom.export.configuration.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CALIF4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_40" model="edicom.export.configuration.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SECUEN4</field>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_41" model="edicom.export.configuration.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPO4</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_42" model="edicom.export.configuration.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PORCEN4</field>
+        <field name="export_type">string</field>
+        <field name="size">8</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_43" model="edicom.export.configuration.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPDTO4</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_44" model="edicom.export.configuration.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CBONI</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_45" model="edicom.export.configuration.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NETO</field>
+        <field name="required" eval="True" />
+        <field name="expression">${object.price_subtotal}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_46" model="edicom.export.configuration.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PVERDE</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_47" model="edicom.export.configuration.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PEDIDO</field>
+        <field name="expression"></field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_48" model="edicom.export.configuration.line">
+        <field name="sequence">47</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">ALBARAN</field>
+        <field name="expression">${object.sale_line_ids.order_id.picking_ids[0].name if object.sale_line_ids.order_id.picking_ids else ""}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_49" model="edicom.export.configuration.line">
+        <field name="sequence">48</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">LOTE</field>
+        <field name="expression">${object.prod_lot_ids[0].name if object.prod_lot_ids else ''}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_50" model="edicom.export.configuration.line">
+        <field name="sequence">49</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">FCARGA</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_51" model="edicom.export.configuration.line">
+        <field name="sequence">50</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">FENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_52" model="edicom.export.configuration.line">
+        <field name="sequence">51</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">MATRICULA</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_53" model="edicom.export.configuration.line">
+        <field name="sequence">52</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPART</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_54" model="edicom.export.configuration.line">
+        <field name="sequence">53</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CANTDEV</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_55" model="edicom.export.configuration.line">
+        <field name="sequence">54</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SECCION</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_56" model="edicom.export.configuration.line">
+        <field name="sequence">55</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NIDENTICKET</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_57" model="edicom.export.configuration.line">
+        <field name="sequence">56</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">BRUTO</field>
+        <field name="expression">${object.price_subtotal + (object.tax_ids.amount/100 * object.price_subtotal)}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_58" model="edicom.export.configuration.line">
+        <field name="sequence">57</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">FECALB</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_59" model="edicom.export.configuration.line">
+        <field name="sequence">58</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">AUTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_60" model="edicom.export.configuration.line">
+        <field name="sequence">59</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TITULO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_61" model="edicom.export.configuration.line">
+        <field name="sequence">60</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CUEXP</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_62" model="edicom.export.configuration.line">
+        <field name="sequence">61</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">UMCUEXP</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_63" model="edicom.export.configuration.line">
+        <field name="sequence">62</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">FECHAEFE</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_64" model="edicom.export.configuration.line">
+        <field name="sequence">63</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">CATEGORIA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_65" model="edicom.export.configuration.line">
+        <field name="sequence">64</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">SUBLIN</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_66" model="edicom.export.configuration.line">
+        <field name="sequence">65</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NORMEXEN1</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_67" model="edicom.export.configuration.line">
+        <field name="sequence">66</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NORMEXEN2</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_68" model="edicom.export.configuration.line">
+        <field name="sequence">67</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NORMEXEN3</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_69" model="edicom.export.configuration.line">
+        <field name="sequence">68</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TIPOEMBALAJE</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_70" model="edicom.export.configuration.line">
+        <field name="sequence">69</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NUMLINPED</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_71" model="edicom.export.configuration.line">
+        <field name="sequence">70</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">GRPLINCOM</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_72" model="edicom.export.configuration.line">
+        <field name="sequence">71</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">POSLININT</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_73" model="edicom.export.configuration.line">
+        <field name="sequence">72</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">FPEDIDO</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_74" model="edicom.export.configuration.line">
+        <field name="sequence">73</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">UBASEPN</field>
+        <field name="export_type">string</field>
+        <field name="size">9</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_75" model="edicom.export.configuration.line">
+        <field name="sequence">74</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">UMEDPN</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_76" model="edicom.export.configuration.line">
+        <field name="sequence">75</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">TAXCAT</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_77" model="edicom.export.configuration.line">
+        <field name="sequence">76</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">MODELO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_78" model="edicom.export.configuration.line">
+        <field name="sequence">77</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">COLOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_79" model="edicom.export.configuration.line">
+        <field name="sequence">78</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">IMPRAPPEL</field>
+        <field name="export_type">string</field>
+        <field name="size">18</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_80" model="edicom.export.configuration.line">
+        <field name="sequence">79</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PRECIODIS</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_81" model="edicom.export.configuration.line">
+        <field name="sequence">80</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">PESO</field>
+        <field name='expression'>${object.product_id.weight}</field>
+        <field name="export_type">float</field>
+        <field name="size">18</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_82" model="edicom.export.configuration.line">
+        <field name="sequence">81</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">UPESO</field>
+        <field name='expression'>${object.product_id.uom_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_83" model="edicom.export.configuration.line">
+        <field name="sequence">82</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NUMEMB</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_invoice_data_linfac_line_84" model="edicom.export.configuration.line">
+        <field name="sequence">83</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_linfac_config" />
+        <field name="name">NUMLINSUBLIN</field>
+        <field name="export_type">string</field>
+        <field name="size">5</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!--  SEMAFORO.TXT  -->
+    <record id="edicom_export_invoice_data_semaforo_config" model="edicom.export.configuration">
+        <field name="name">2.4. Semaforo para la exportación de la Factura</field>
+        <field name="model" ref="account.model_account_move" />
+    </record>
+    <record id="edicom_export_invoice_data_semaforo_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data" />
+        <field name="name">semaforo</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_invoice_data_semaforo_config" />
+    </record>
+    <record id="edicom_export_invoice_data_semaforo_line_0" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_invoice_data_semaforo_config" />
+        <field name="name">semaforo</field>
+        <field name="fixed_value">semaforo</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+    <!-- prettier-ignore-end -->
+</odoo>

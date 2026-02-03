@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.l10n.es</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="l10n_es_edi_sii.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@invisible='l10n_es_edi_test_env']" position="before">
+                <br />
+                <div class="o_row">
+                    <label for="sii_send_mode" class="o_light_label" />
+                    <field name="sii_send_mode" />
+                </div>
+                <div class="text-muted">
+                    Existen tres modos de envío de facturas al SII:
+                </div>
+                <div class="text-muted">
+                    Automático: Se envía en el momento de validar la factura.
+                </div>
+                <div class="text-muted">A una hora fija: Se envía a una hora fija.</div>
+                <div class="text-muted">
+                    Con retardo: Se envía con un retardo de X horas
+                </div>
+                <br />
+                <label
+                    for="sii_send_time"
+                    class="o_light_label"
+                    invisible="not sii_send_mode == 'fix_time'"
+                />
+                <field
+                    name="sii_send_time"
+                    widget="float_time"
+                    invisible="not sii_send_mode == 'fix_time'"
+                />
+                <div class="text-muted" invisible="not sii_send_mode == 'fix_time'">
+                    Hora a la que se enviarán las facturas al SII.
+                </div>
+                <br />
+                <label
+                    for="sii_delay_time"
+                    class="o_light_label"
+                    invisible="not sii_send_mode == 'delayed'"
+                />
+                <field
+                    name="sii_delay_time"
+                    widget="float_time"
+                    invisible="not sii_send_mode == 'delayed'"
+                />
+                <div class="text-muted" invisible="not sii_send_mode == 'delayed'">
+                    Horas de retraso con las que se enviarán las facturas al SII.
+                </div>
+                <br />
+                <label for="l10n_es_edi_force_invoice_date" class="o_light_label" />
+                <field name="l10n_es_edi_force_invoice_date" />
+                <div class="text-muted">
+                    Si marcamos la casilla, cuando una factura se envíe al SII,
+                    como fecha de operación del SII se enviará la fecha de factura.
+                    Por defecto Odoo manda la fecha de entrega.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

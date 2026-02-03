@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="product_attribute_rule_tree">
+        <field name="model">product.attribute.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="action" />
+                <field name="attribute_x_id" />
+                <field name="attribute_y_id" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_attribute_rule_form">
+        <field name="model">product.attribute.rule</field>
+        <field name="arch" type="xml">
+            <form string="Reglas">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        name="action_update_lines"
+                        type="object"
+                        string="Actualizar líneas"
+                        class="oe_stat_button"
+                        icon="fa-refresh"
+                    />
+                </div>
+                <group>
+                    <group>
+                        <field name="name" />
+                        <field name="action" />
+                        <field
+                            name="product_tmpl_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True, 'no_create_edit': True}"
+                        />
+                        <field
+                            name="exclude_product_tmpl_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True, 'no_create_edit': True}"
+                        />
+                    </group>
+                    <group>
+                        <field name="attribute_x_id" />
+                        <field name="attribute_y_id" />
+                    </group>
+                    <field
+                        name="rule_line_ids"
+                        widget="x2many_2d_matrix"
+                        field_x_axis="value_x"
+                        field_y_axis="value_y"
+                        field_value="available"
+                        show_row_totals="0"
+                        show_column_totals="0"
+                    >
+                        <!--
+                        por defecto limita a 40, cada combinacion es 1, como queremos
+                        mostrar todas las combinaciones, ponemos un limite extremo -->
+                        <tree limit="999999">
+                            <field name="value_x" />
+                            <field name="value_y" />
+                            <field name="available" />
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_attribute_rule_line_tree">
+        <field name="model">product.attribute.rule.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="rule_id" />
+                <field name="value_x" />
+                <field name="value_y" />
+                <field name="available" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_attribute_rule_line_search">
+        <field name="model">product.attribute.rule.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="rule_id" />
+                <field name="value_x" />
+                <field name="value_y" />
+                <filter
+                    name="rule_id"
+                    string="Regla"
+                    context="{'group_by': 'rule_id'}"
+                />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="product_attribute_view_form">
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Reglas de atributo">
+                    <field name="rule_ids" widget="one2many_list" nolabel="1" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_template_only_form_view" model="ir.ui.view">
+        <field name="name">product.template.product.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    string="Restricciones"
+                    name="action_open_attribute_rules"
+                    type="object"
+                    icon="fa-times"
+                    class="oe_stat_button"
+                    invisible="product_variant_count &lt;= 1"
+                    groups="product.group_product_variant"
+                />
+            </div>
+        </field>
+    </record>
+    <record id="product_attribute_rule_action" model="ir.actions.act_window">
+        <field name="name">Reglas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.attribute.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_product_attribute_action"
+        name="Reglas de atributo"
+        parent="sale.prod_config_main"
+        action="product_attribute_rule_action"
+    />
+</odoo>

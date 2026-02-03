@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_trial_balance_filters"
+        inherit_id="account_financial_report.report_trial_balance_filters"
+    >
+        <xpath expr="//div[hasclass('labels')]" position="inside">
+            <t t-if="o.print_date">
+                <div class="act_as_cell">Fecha de impresión</div>
+            </t>
+        </xpath>
+        <xpath expr="//div[hasclass('act_as_row')][2]" position="inside">
+            <div class="act_as_cell">
+                <span t-field="o.print_date" />
+            </div>
+        </xpath>
+    </template>
+    <template
+        id="internal_layout"
+        inherit_id="account_financial_report.internal_layout"
+    >
+        <xpath expr="//div[hasclass('footer')]/div/div/span" position="replace">
+            <t t-if="o and o._description != 'report_trial_balance'">
+                <span
+                    t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"
+                />
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="quality_point_view_form_inherit_mrp" model="ir.ui.view">
+        <field name="name">quality.point.view.form.report_id</field>
+        <field name="model">quality.point</field>
+        <field
+            name="inherit_id"
+            ref="mrp_workorder.quality_point_view_form_inherit_mrp"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='test_report_type']" position="before">
+                <field name="report_id" invisible="test_type != 'print_label'" />
+                <field
+                    name="report_model"
+                    invisible="test_type != 'print_label'"
+                    required="report_id != False"
+                />
+            </xpath>
+            <xpath expr="//field[@name='test_report_type']" position="after">
+                <field name="copies_number" invisible="test_type != 'print_label'" />
+            </xpath>
+            <xpath expr="//field[@name='test_report_type']" position="attributes">
+                <attribute
+                    name="invisible"
+                    separator=" or "
+                    add="report_id != False"
+                    remove=""
+                    value=""
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

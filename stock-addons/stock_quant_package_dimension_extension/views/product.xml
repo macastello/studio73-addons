@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='packaging']" position="after">
+                <button
+                    name="button_autocreate_packaging"
+                    string="Crear empaquetados automaticamente"
+                    type="object"
+                    class="oe_highlight"
+                    invisible="type not in ['product', 'consu'] or product_variant_count &gt; 1 or is_product_variant"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="product_template_kanban_view" model="ir.ui.view">
+        <field name="name">product.template.common.kanban</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']/parent::div" position="after">
+                Master:
+                <field name="package_qty" />
+                <field name="uom_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="product_product_form_view" model="ir.ui.view">
+        <field name="name">product.normal.form.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='button_autocreate_packaging']"
+                position="attributes"
+            >
+                <attribute name="invisible">0</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_packaging_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.packaging.form</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="product.product_packaging_form_view" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="package_type_id" />
+            </field>
+        </field>
+    </record>
+    <record id="product_packaging_tree_view_inherit" model="ir.ui.view">
+        <field name="name">product.packaging.tree.view.inherit</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="product.product_packaging_tree_view" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="barcode" />
+            </field>
+        </field>
+    </record>
+</odoo>

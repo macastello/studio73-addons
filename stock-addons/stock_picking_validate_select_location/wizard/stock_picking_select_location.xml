@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="picking_select_location" model="ir.ui.view">
+        <field name="name">picking.batch.change.location</field>
+        <field name="model">stock.picking.select.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>Escanee o seleccione la ubicación de destino</p>
+                <group>
+                    <field name="parent_location_id" invisible="1" />
+                    <field
+                        name="location_id"
+                        required="1"
+                        domain="[('id', 'child_of', parent_location_id)]"
+                        options="{'no_create': True, 'no_open': True, 'no_create_edit': True}"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="assign_location"
+                        type="object"
+                        string="Confirmar"
+                        class="oe_highlight"
+                    />
+                    <button special="cancel" string="Cancelar" />
+                </footer>
+                <field name="_barcode_scanned" widget="barcode_handler" />
+            </form>
+        </field>
+    </record>
+</odoo>

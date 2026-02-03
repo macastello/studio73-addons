@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_barcode_view_picking_type_form" model="ir.ui.view">
+        <field name="name">stock.picking.type.form</field>
+        <field name="model">stock.picking.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_barcode.stock_barcode_view_picking_type_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='barcode_app']/group[@name='restrict_scan_settings']"
+                position="inside"
+            >
+                <field name="stock_barcode_add_new_product" />
+                <field name="stock_barcode_allow_scan_extra_qty" />
+                <field name="stock_barcode_force_increment" />
+                <field name="stock_barcode_close_partial_batch" />
+                <field name="show_counter_lines" />
+                <field name="stock_barcode_avoid_grouped_lines" />
+                <field name="stock_barcode_restrict_products" />
+                <field name="stock_barcode_groupby_loc_and_prod" />
+            </xpath>
+            <xpath expr="//field[@name='restrict_scan_dest_location']" position="after">
+                <field
+                    name="stock_barcode_allow_any_dest_location"
+                    invisible="restrict_scan_dest_location == 'no'"
+                    groups="stock.group_stock_multi_locations"
+                />
+                <field
+                    name="apply_dest_location_all_lines"
+                    invisible="restrict_scan_dest_location == 'no'"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

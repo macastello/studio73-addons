@@ -1,0 +1,1351 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_order_import_edicom" model="edicom.import.config">
+        <field name="name">Importación de pedidos de venta desde Edicom</field>
+        <field name="version">5</field>
+        <field name="dir" />
+    </record>
+
+    <record id="CABPED_CLAVE_1" model="edicom.import.config.line">
+        <field name="sequence">1</field>
+        <field name="name">CLAVE_1</field>
+        <field name="field_name">edicom_order_id</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_NODO" model="edicom.import.config.line">
+        <field name="sequence">2</field>
+        <field name="name">NODO</field>
+        <field name="field_name">edicom_node</field>
+        <field name="type">valp</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FUNCION" model="edicom.import.config.line">
+        <field name="sequence">3</field>
+        <field name="name">FUNCION</field>
+        <field name="field_name">edicom_function</field>
+        <field name="type">valp</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_NUMPED" model="edicom.import.config.line">
+        <field name="sequence">4</field>
+        <field name="name">NUMPED</field>
+        <field name="field_name">client_order_ref</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FECHA" model="edicom.import.config.line">
+        <field name="sequence">5</field>
+        <field name="name">FECHA</field>
+        <field name="field_name">date_order</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FECHAEPR" model="edicom.import.config.line">
+        <field name="sequence">6</field>
+        <field name="name">FECHAEPR</field>
+        <field name="field_name">commitment_date</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FECHAERE" model="edicom.import.config.line">
+        <field name="sequence">7</field>
+        <field name="name">FECHAERE</field>
+        <field name="field_name">commitment_date</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FECHATOP" model="edicom.import.config.line">
+        <field name="sequence">8</field>
+        <field name="name">FECHATOP</field>
+        <field name="field_name">commitment_date</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FORMAPAG" model="edicom.import.config.line">
+        <field name="sequence">9</field>
+        <field name="name">FORMAPAG</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CONDESP" model="edicom.import.config.line">
+        <field name="sequence">10</field>
+        <field name="name">CONDESP</field>
+        <field name="field_name">edicom_special_cond</field>
+        <field name="type">valp</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PEDABIER" model="edicom.import.config.line">
+        <field name="sequence">11</field>
+        <field name="name">PEDABIER</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_LPRECIOS" model="edicom.import.config.line">
+        <field name="sequence">12</field>
+        <field name="name">EMISOR</field>
+        <field name="field_name">edicom_emitter_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_NCONTRAT" model="edicom.import.config.line">
+        <field name="sequence">13</field>
+        <field name="name">COMPRADOR</field>
+        <field name="field_name">edicom_buyer_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FCONTRAT" model="edicom.import.config.line">
+        <field name="sequence">14</field>
+        <field name="name">FCONTRAT</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CLIENTE" model="edicom.import.config.line">
+        <field name="sequence">15</field>
+        <field name="name">CLIENTE</field>
+        <field name="field_name">partner_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_QPIDE" model="edicom.import.config.line">
+        <field name="sequence">16</field>
+        <field name="name">QPIDE</field>
+        <field name="field_name">partner_invoice_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_AQSF" model="edicom.import.config.line">
+        <field name="sequence">17</field>
+        <field name="name">AQSF</field>
+        <field name="field_name">partner_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_DEPTO" model="edicom.import.config.line">
+        <field name="sequence">18</field>
+        <field name="name">DEPTO</field>
+        <field name="field_name">edicom_dept</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_RECEPTOR" model="edicom.import.config.line">
+        <field name="sequence">19</field>
+        <field name="name">RECEPTOR</field>
+        <field name="field_name">partner_shipping_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.partner</field>
+        <field name="search_field">edicom_ean13</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_MUELLE" model="edicom.import.config.line">
+        <field name="sequence">20</field>
+        <field name="name">MUELLE</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_VENDEDOR" model="edicom.import.config.line">
+        <field name="sequence">21</field>
+        <field name="name">VENDEDOR</field>
+        <field name='field_name'>company_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.company</field>
+        <field name="search_field">vat</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_QPAGA" model="edicom.import.config.line">
+        <field name="sequence">22</field>
+        <field name="name">QPAGA</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORTES" model="edicom.import.config.line">
+        <field name="sequence">23</field>
+        <field name="name">PORTES</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_RECOGIDA" model="edicom.import.config.line">
+        <field name="sequence">24</field>
+        <field name="name">RECOGIDA</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_REPOSI" model="edicom.import.config.line">
+        <field name="sequence">25</field>
+        <field name="name">REPOSI</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_ENTREGA" model="edicom.import.config.line">
+        <field name="sequence">26</field>
+        <field name="name">ENTREGA</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_MONEDA" model="edicom.import.config.line">
+        <field name="sequence">27</field>
+        <field name="name">MONEDA</field>
+        <field name='field_name'>currency_id</field>
+        <field name="type">m2o</field>
+        <field name="model">res.currency</field>
+        <field name="search_field">name</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CALIF1" model="edicom.import.config.line">
+        <field name="sequence">28</field>
+        <field name="name">CALIF1</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_SECUEN1" model="edicom.import.config.line">
+        <field name="sequence">29</field>
+        <field name="name">SECUEN1</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPO1" model="edicom.import.config.line">
+        <field name="sequence">30</field>
+        <field name="name">TIPO1</field>
+        <field name='field_name'>tax_id</field>
+        <field name="type">m2o</field>
+        <field name="model">account.tax</field>
+        <field name="search_field">name</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORCEN1" model="edicom.import.config.line">
+        <field name="sequence">31</field>
+        <field name="name">PORCEN1</field>
+        <field name='field_name'>tax_id</field>
+        <field name="type">m2o</field>
+        <field name="model">account.tax</field>
+        <field name="search_field">amount</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPDES1" model="edicom.import.config.line">
+        <field name="sequence">32</field>
+        <field name="name">IMPDES1</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CALIF2" model="edicom.import.config.line">
+        <field name="sequence">33</field>
+        <field name="name">CALIF2</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_SECUEN2" model="edicom.import.config.line">
+        <field name="sequence">34</field>
+        <field name="name">SECUEN2</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPO2" model="edicom.import.config.line">
+        <field name="sequence">35</field>
+        <field name="name">TIPO2</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORCEN2" model="edicom.import.config.line">
+        <field name="sequence">36</field>
+        <field name="name">PORCEN2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPDES2" model="edicom.import.config.line">
+        <field name="sequence">37</field>
+        <field name="name">IMPDES2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CALIF3" model="edicom.import.config.line">
+        <field name="sequence">38</field>
+        <field name="name">CALIF3</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_SECUEN3" model="edicom.import.config.line">
+        <field name="sequence">39</field>
+        <field name="name">SECUEN3</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPO3" model="edicom.import.config.line">
+        <field name="sequence">40</field>
+        <field name="name">TIPO3</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORCEN3" model="edicom.import.config.line">
+        <field name="sequence">41</field>
+        <field name="name">PORCEN3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPDES3" model="edicom.import.config.line">
+        <field name="sequence">42</field>
+        <field name="name">IMPDES3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CALIF4" model="edicom.import.config.line">
+        <field name="sequence">43</field>
+        <field name="name">CALIF4</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_SECUEN4" model="edicom.import.config.line">
+        <field name="sequence">44</field>
+        <field name="name">SECUEN4</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPO4" model="edicom.import.config.line">
+        <field name="sequence">45</field>
+        <field name="name">TIPO4</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORCEN4" model="edicom.import.config.line">
+        <field name="sequence">46</field>
+        <field name="name">PORCEN4</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPDES4" model="edicom.import.config.line">
+        <field name="sequence">47</field>
+        <field name="name">IMPDES4</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_CALIF5" model="edicom.import.config.line">
+        <field name="sequence">48</field>
+        <field name="name">CALIF5</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_SECUEN5" model="edicom.import.config.line">
+        <field name="sequence">49</field>
+        <field name="name">SECUEN5</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPO5" model="edicom.import.config.line">
+        <field name="sequence">50</field>
+        <field name="name">TIPO5</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PORCEN5" model="edicom.import.config.line">
+        <field name="sequence">51</field>
+        <field name="name">PORCEN5</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPDES5" model="edicom.import.config.line">
+        <field name="sequence">52</field>
+        <field name="name">IMPDES5</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPOIMP1" model="edicom.import.config.line">
+        <field name="sequence">53</field>
+        <field name="name">TIPOIMP1</field>
+        <field name="type">integer</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TASAIMP1" model="edicom.import.config.line">
+        <field name="sequence">54</field>
+        <field name="name">TASAIMP1</field>
+        <field name="field_name">amount_tax</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_BASEIMP1" model="edicom.import.config.line">
+        <field name="sequence">55</field>
+        <field name="name">BASEIMP1</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPIMP1" model="edicom.import.config.line">
+        <field name="sequence">56</field>
+        <field name="name">IMPIMP1</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPOIMP2" model="edicom.import.config.line">
+        <field name="sequence">57</field>
+        <field name="name">TIPOIMP1</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TASAIMP2" model="edicom.import.config.line">
+        <field name="sequence">58</field>
+        <field name="name">TASAIMP2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_BASEIMP2" model="edicom.import.config.line">
+        <field name="sequence">59</field>
+        <field name="name">BASEIMP2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPIMP2" model="edicom.import.config.line">
+        <field name="sequence">60</field>
+        <field name="name">IMPIMP2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TIPOIMP3" model="edicom.import.config.line">
+        <field name="sequence">61</field>
+        <field name="name">TIPOIMP3</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TASAIMP3" model="edicom.import.config.line">
+        <field name="sequence">62</field>
+        <field name="name">TASAIMP3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_BASEIMP3" model="edicom.import.config.line">
+        <field name="sequence">63</field>
+        <field name="name">BASEIMP3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPIMP3" model="edicom.import.config.line">
+        <field name="sequence">64</field>
+        <field name="name">IMPIMP3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PATREF" model="edicom.import.config.line">
+        <field name="sequence">65</field>
+        <field name="name">PATREF</field>
+        <field name="type">text</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PATDIAS" model="edicom.import.config.line">
+        <field name="sequence">66</field>
+        <field name="name">PATDIAS</field>
+        <field name="field_name">payment_term_id</field>
+        <field name="type">m2o</field>
+        <field name="model">account.payment.term.line</field>
+        <field name="search_field">days</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_PATMES" model="edicom.import.config.line">
+        <field name="sequence">67</field>
+        <field name="name">PATMES</field>
+        <field name="field_name">reference</field>
+        <field name="type">integer</field>
+        <field name="search_field">name</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_FECHAV" model="edicom.import.config.line">
+        <field name="sequence">68</field>
+        <field name="name">FECHAV</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_VTO1" model="edicom.import.config.line">
+        <field name="sequence">69</field>
+        <field name="name">VTO1</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPVTO1" model="edicom.import.config.line">
+        <field name="sequence">70</field>
+        <field name="name">IMPVTO1</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_VTO2" model="edicom.import.config.line">
+        <field name="sequence">71</field>
+        <field name="name">VTO2</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPVTO2" model="edicom.import.config.line">
+        <field name="sequence">72</field>
+        <field name="name">IMPVTO2</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_VTO3" model="edicom.import.config.line">
+        <field name="sequence">73</field>
+        <field name="name">VTO3</field>
+        <field name="type">datetime</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">12</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_IMPVTO3" model="edicom.import.config.line">
+        <field name="sequence">74</field>
+        <field name="name">IMPVTO3</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TBRUTO" model="edicom.import.config.line">
+        <field name="sequence">75</field>
+        <field name="name">TBRUTO</field>
+        <field name="field_name">amount_total</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TNETO" model="edicom.import.config.line">
+        <field name="sequence">76</field>
+        <field name="name">TNETO</field>
+        <field name="field_name">amount_untaxed</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TCARGES" model="edicom.import.config.line">
+        <field name="sequence">77</field>
+        <field name="name">TCARGES</field>
+        <field name="field_name">general_discount</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_BASEIMP" model="edicom.import.config.line">
+        <field name="sequence">78</field>
+        <field name="name">BASEIMP</field>
+        <field name="field_name">amount_untaxed</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TOTIMPUE" model="edicom.import.config.line">
+        <field name="sequence">79</field>
+        <field name="name">TOTIMPUE</field>
+        <field name="field_name">amount_total</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="CABPED_TOTAL" model="edicom.import.config.line">
+        <field name="sequence">80</field>
+        <field name="name">TOTAL</field>
+        <field name="field_name">amount_total</field>
+        <field name="type">float</field>
+        <field name="file">CABPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <!-- Start Detalle del Pedido -->
+    <record id="LINPED_CLAVE_1" model="edicom.import.config.line">
+        <field name="sequence">1</field>
+        <field name="name">CLAVE_1</field>
+        <field name="field_name">edicom_order_id_line</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CLAVE_2" model="edicom.import.config.line">
+        <field name="sequence">2</field>
+        <field name="name">CLAVE_2</field>
+        <field name="field_name">edicom_line_number</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">5</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_REFEAN" model="edicom.import.config.line">
+        <field name="sequence">3</field>
+        <field name="name">REFEAN</field>
+        <field name="field_name">product_id</field>
+        <field name="type">m2o</field>
+        <field name="model">product.product</field>
+        <field name="search_field">barcode</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">17</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_DUN14" model="edicom.import.config.line">
+        <field name="sequence">4</field>
+        <field name="name">DUN14</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">14</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_VP" model="edicom.import.config.line">
+        <field name="sequence">5</field>
+        <field name="name">VP</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_REFCLI" model="edicom.import.config.line">
+        <field name="sequence">6</field>
+        <field name="name">REFCLI</field>
+        <field name="field_name">client_order_ref</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_REFPROV" model="edicom.import.config.line">
+        <field name="sequence">7</field>
+        <field name="name">REFPROV</field>
+        <field name="field_name">edicom_refprov</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_REFETIQ" model="edicom.import.config.line">
+        <field name="sequence">8</field>
+        <field name="name">REFETIQ</field>
+        <field name="field_name">edicom_refetiq</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_DESCMER" model="edicom.import.config.line">
+        <field name="sequence">9</field>
+        <field name="name">DESCMER</field>
+        <field name="field_name">name</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_DESCMER2" model="edicom.import.config.line">
+        <field name="sequence">10</field>
+        <field name="name">DESCMER2</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_DESCCONS" model="edicom.import.config.line">
+        <field name="sequence">11</field>
+        <field name="name">DESCCONS</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">35</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CANTPED" model="edicom.import.config.line">
+        <field name="sequence">12</field>
+        <field name="name">CANTPED</field>
+        <field name="field_name">product_uom_qty</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_UMEDIDA" model="edicom.import.config.line">
+        <field name="sequence">13</field>
+        <field name="name">UMEDIDA</field>
+        <field name="field_name">product_uom</field>
+        <field name="type">m2o</field>
+        <field name="model">uom.uom</field>
+        <field name="search_field">name</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CANTGRAT" model="edicom.import.config.line">
+        <field name="sequence">14</field>
+        <field name="name">CANTGRAT</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CANTUE" model="edicom.import.config.line">
+        <field name="sequence">15</field>
+        <field name="name">CANTUE</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CANTBONI" model="edicom.import.config.line">
+        <field name="sequence">16</field>
+        <field name="name">CANTBONI</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_FECHAE" model="edicom.import.config.line">
+        <field name="sequence">17</field>
+        <field name="name">FECHAE</field>
+        <field name="field_name">commitment_date</field>
+        <field name="type">datetime</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">12</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PRECION" model="edicom.import.config.line">
+        <field name="sequence">18</field>
+        <field name="name">PRECION</field>
+        <field name="field_name">price_unit</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PRECIOB" model="edicom.import.config.line">
+        <field name="sequence">19</field>
+        <field name="name">PRECIOB</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PVP" model="edicom.import.config.line">
+        <field name="sequence">20</field>
+        <field name="name">PVP</field>
+        <field name="field_name">edicom_pvp</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_NETO" model="edicom.import.config.line">
+        <field name="sequence">21</field>
+        <field name="name">NETO</field>
+        <field name="field_name">price_subtotal</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CALIF1" model="edicom.import.config.line">
+        <field name="sequence">22</field>
+        <field name="name">CALIF1</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_SECUEN1" model="edicom.import.config.line">
+        <field name="sequence">23</field>
+        <field name="name">SECUEN1</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPO1" model="edicom.import.config.line">
+        <field name="sequence">24</field>
+        <field name="name">TIPO1</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PORCEN1" model="edicom.import.config.line">
+        <field name="sequence">25</field>
+        <field name="name">PORCEN1</field>
+        <field name="field_name">discount</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPDES1" model="edicom.import.config.line">
+        <field name="sequence">26</field>
+        <field name="name">IMPDES1</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CALIF2" model="edicom.import.config.line">
+        <field name="sequence">27</field>
+        <field name="name">CALIF2</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_SECUEN2" model="edicom.import.config.line">
+        <field name="sequence">28</field>
+        <field name="name">SECUEN2</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPO2" model="edicom.import.config.line">
+        <field name="sequence">29</field>
+        <field name="name">TIPO2</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PORCEN2" model="edicom.import.config.line">
+        <field name="sequence">30</field>
+        <field name="name">PORCEN2</field>
+        <field name="field_name">discount2</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPDES2" model="edicom.import.config.line">
+        <field name="sequence">31</field>
+        <field name="name">IMPDES2</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CALIF3" model="edicom.import.config.line">
+        <field name="sequence">32</field>
+        <field name="name">CALIF3</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_SECUEN3" model="edicom.import.config.line">
+        <field name="sequence">33</field>
+        <field name="name">SECUEN3</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPO3" model="edicom.import.config.line">
+        <field name="sequence">34</field>
+        <field name="name">TIPO3</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PORCEN3" model="edicom.import.config.line">
+        <field name="sequence">35</field>
+        <field name="name">PORCEN3</field>
+        <field name="field_name">discount3</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPDES3" model="edicom.import.config.line">
+        <field name="sequence">36</field>
+        <field name="name">IMPDES3</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_CALIF4" model="edicom.import.config.line">
+        <field name="sequence">37</field>
+        <field name="name">CALIF4</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_SECUEN4" model="edicom.import.config.line">
+        <field name="sequence">38</field>
+        <field name="name">SECUEN4</field>
+        <field name="type">integer</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">2</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPO4" model="edicom.import.config.line">
+        <field name="sequence">39</field>
+        <field name="name">TIPO4</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PORCEN4" model="edicom.import.config.line">
+        <field name="sequence">40</field>
+        <field name="name">PORCEN4</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPDES4" model="edicom.import.config.line">
+        <field name="sequence">41</field>
+        <field name="name">IMPDES4</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPOIMP1" model="edicom.import.config.line">
+        <field name="sequence">42</field>
+        <field name="name">TIPOIMP1</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TASAIMP1" model="edicom.import.config.line">
+        <field name="sequence">43</field>
+        <field name="name">TASAIMP1</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPIMP1" model="edicom.import.config.line">
+        <field name="sequence">44</field>
+        <field name="name">IMPIMP1</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPOIMP2" model="edicom.import.config.line">
+        <field name="sequence">45</field>
+        <field name="name">TIPOIMP2</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TASAIMP2" model="edicom.import.config.line">
+        <field name="sequence">46</field>
+        <field name="name">TASAIMP2</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPIMP2" model="edicom.import.config.line">
+        <field name="sequence">47</field>
+        <field name="name">IMPIMP2</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TIPOIMP3" model="edicom.import.config.line">
+        <field name="sequence">48</field>
+        <field name="name">TIPOIMP3</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_TASAIMP3" model="edicom.import.config.line">
+        <field name="sequence">49</field>
+        <field name="name">TASAIMP3</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">8</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_IMPIMP3" model="edicom.import.config.line">
+        <field name="sequence">50</field>
+        <field name="name">IMPIMP3</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_NUCUE" model="edicom.import.config.line">
+        <field name="sequence">51</field>
+        <field name="name">NUCUE</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_FORMATO" model="edicom.import.config.line">
+        <field name="sequence">52</field>
+        <field name="name">FORMATO</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_NUEXP" model="edicom.import.config.line">
+        <field name="sequence">53</field>
+        <field name="name">NUEXP</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_PNCAJA" model="edicom.import.config.line">
+        <field name="sequence">54</field>
+        <field name="name">PNCAJA</field>
+        <field name="type">float</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">15</field>
+        <field name="decimal_length">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+
+    <record id="LINPED_MONEDAPRECIO" model="edicom.import.config.line">
+        <field name="sequence">55</field>
+        <field name="name">MONEDAPRECIO</field>
+        <field name="type">text</field>
+        <field name="file">LINPED</field>
+        <field name="dimension">3</field>
+        <field name="import_config_id" ref="sale_order_import_edicom" />
+    </record>
+    <!-- End Detalle del Pedido -->
+</odoo>

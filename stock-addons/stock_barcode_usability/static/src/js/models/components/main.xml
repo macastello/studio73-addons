@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="stock_barcode.MainComponent" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('o_add_line')]" position="attributes">
+            <attribute name="t-if">env.model.displayAddNewProduct</attribute>
+        </xpath>
+        <xpath
+            expr="//button[hasclass('o_show_information')]/parent::t"
+            position="before"
+        >
+            <span
+                class="o_barcode_lines_counter d-flex flex-column align-items-start justify-content-center pe-1"
+                t-if="displayCounterLines &amp;&amp; state.view === 'barcodeLines' &amp;&amp; misclines"
+            >
+                <span class="small" t-if="misclines.length">
+                    Nº líneas:
+                    <t t-esc="misclines.filter(line => line.qty_done > 0).length" />
+                    /
+                    <t t-esc="misclines.length" />
+                </span>
+                <span class="small" t-if="sublines.length">
+                    Nº sublíneas:
+                    <t t-esc="sublines.filter(line => line.qty_done > 0).length" />
+                    /
+                    <t t-esc="sublines.length" />
+                </span>
+            </span>
+        </xpath>
+    </t>
+</templates>

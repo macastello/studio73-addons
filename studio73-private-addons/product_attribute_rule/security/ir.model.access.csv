@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_attribute_rule_user,product.attribute.rule.user,model_product_attribute_rule,product.group_product_variant,1,1,1,1
+access_product_attribute_rule_line_user,product.attribute.rule.line.user,model_product_attribute_rule_line,product.group_product_variant,1,1,1,1
+access_product_attribute_rule_user_read,product.attribute.rule.user.read,model_product_attribute_rule,,1,0,0,0
+access_product_attribute_rule_line_user_read,product.attribute.rule.line.user.read,model_product_attribute_rule_line,,1,0,0,0

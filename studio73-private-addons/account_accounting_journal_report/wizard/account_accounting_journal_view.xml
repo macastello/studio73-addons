@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_accounting_journal_form" model="ir.ui.view">
+        <field name="name">account.accounting_journal.form</field>
+        <field name="model">account.accounting_journal</field>
+        <field name="arch" type="xml">
+            <form string="Diario de contabilidad">
+                <group>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                        <field name="target_move" widget="radio" />
+                    </group>
+                    <group>
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="include_opening" />
+                        <field name="include_closing" />
+                        <field name="include_pyg" />
+                        <field name="level" />
+                        <field name="include_analytic_account" />
+                    </group>
+                </group>
+                <group invisible="not binary_file" col="4" string="Descargar archivo">
+                    <field name="binary_file" readonly="True" filename="file_name" />
+                    <field name="file_name" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="export"
+                        string="Exportar a CSV"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="export_pdf"
+                        string="Exportar a PDF"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancelar" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_account_accounting_journal" model="ir.actions.act_window">
+        <field name="name">Diario de contabilidad</field>
+        <field name="res_model">account.accounting_journal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="menu_movimientos_apuntes"
+        action="action_account_accounting_journal"
+        name="Diario de contabilidad"
+        parent="account.menu_finance_reports"
+        sequence="0"
+    />
+</odoo>

@@ -1,0 +1,367 @@
+<odoo>
+    <record id="customer_account_payment_advanced_form" model="ir.ui.view">
+        <field name="name">customer.account.payment.advanced.form</field>
+        <field name="model">account.payment.advanced</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_post"
+                        string="Confirmar"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_post_and_new"
+                        string="Confirm y nuevo"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_draft"
+                        string="A borrador"
+                        type="object"
+                        class="btn btn-secondary"
+                        invisible="state != 'cancel'"
+                        groups="account.group_account_invoice"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancelar"
+                        type="object"
+                        invisible="state != 'posted'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,posted"
+                    />
+                </header>
+                <sheet>
+                    <!-- Invisible fields -->
+                    <field name="id" invisible="1" />
+                    <field name="is_move_sent" invisible="1" />
+                    <field name="partner_type" invisible="1" />
+                    <field name="payment_type" invisible="1" />
+                    <field name="journal_id_type" invisible="1" />
+                    <field
+                        name="company_id"
+                        invisible="1"
+                        groups="!base.group_multi_company"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <!-- Invoice stat button -->
+                        <button
+                            name="button_open_invoices"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            invisible="not invoices_count"
+                        >
+                            <field name="invoices_count" />
+                            Facturas
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" readonly="1" force_save="1" />
+                    </h1>
+                    <group>
+                        <group>
+                            <field
+                                name="partner_id"
+                                default_focus="1"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="currency_id" invisible="1" />
+                            <field
+                                name="concile_move_line"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="no_compute" readonly="state != 'draft'" />
+                            <field
+                                name="amount"
+                                class="oe_inline"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="date_maturity" readonly="state != 'draft'" />
+                            <field name="communication" readonly="state != 'draft'" />
+                            <field
+                                name="partner_bank_id"
+                                readonly="state != 'draft'"
+                                invisible="journal_id_type != 'bank'"
+                                context="{'default_partner_id': partner_id}"
+                                domain="[('partner_id', '=', partner_id)]"
+                            />
+                            <field
+                                name="payment_mode_id"
+                                options="{'no_create': True, 'no_create_edit': True}"
+                            />
+                        </group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'" />
+                            <field
+                                name="journal_id"
+                                domain="[('type', 'in', ['bank', 'cash']), ('for_customer_payments', '=', True)]"
+                                widget="selection"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="writeoff_amount" readonly="1" force_save="1" />
+                            <field
+                                name="payment_difference_handling"
+                                readonly="state != 'draft'"
+                                invisible="not writeoff_amount"
+                            />
+                            <field
+                                name="writeoff_account_id"
+                                readonly="state != 'draft'"
+                                invisible="payment_difference_handling != 'reconcile'"
+                                required="payment_difference_handling == 'reconcile' and writeoff_amount != 0"
+                            />
+                            <field
+                                name="writeoff_comment"
+                                readonly="state != 'draft'"
+                                invisible="payment_difference_handling != 'reconcile'"
+                                required="payment_difference_handling == 'reconcile' and writeoff_amount != 0"
+                            />
+                            <field
+                                name="company_id"
+                                widget="selection"
+                                groups="base.group_multi_company"
+                                readonly="state != 'draft'"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="info" string="Información de pago">
+                            <label for="entry_invoice_ids" />
+                            <field
+                                name="entry_invoice_ids"
+                                readonly="state != 'draft'"
+                                options="{'reload_on_button': True}"
+                            >
+                                <tree
+                                    editable="bottom"
+                                    colors="gray:amount==0"
+                                    create="0"
+                                    delete="0"
+                                >
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="state" column_invisible="1" />
+                                    <field name="entry_type" column_invisible="1" />
+                                    <field name="name" />
+                                    <field name="invoice_id" column_invisible="1" />
+                                    <field name="move_line_id" column_invisible="1" />
+                                    <field
+                                        name="description"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="date_original"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="date_due"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="amount_original"
+                                        readonly="1"
+                                        force_save="1"
+                                        sum="Importe total original"
+                                    />
+                                    <field
+                                        name="amount_unreconciled"
+                                        readonly="1"
+                                        force_save="1"
+                                        sum="Importe total sin conciliar"
+                                    />
+                                    <field name="reconcile" />
+                                    <field name="amount" sum="Importe total" />
+                                    <field name="unpaid_expense" column_invisible="1" />
+                                    <field name="move_line_id" column_invisible="1" />
+                                </tree>
+                            </field>
+                            <label for="entry_refund_ids" />
+                            <field
+                                name="entry_refund_ids"
+                                readonly="state != 'draft'"
+                                options="{'reload_on_button': True}"
+                            >
+                                <tree
+                                    editable="bottom"
+                                    colors="gray:amount==0"
+                                    create="0"
+                                    delete="0"
+                                >
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="state" column_invisible="1" />
+                                    <field name="entry_type" column_invisible="1" />
+                                    <field name="name" />
+                                    <field name="invoice_id" column_invisible="1" />
+                                    <field name="move_line_id" column_invisible="1" />
+                                    <field
+                                        name="description"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="date_original"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="date_due"
+                                        readonly="1"
+                                        force_save="1"
+                                    />
+                                    <field
+                                        name="amount_original"
+                                        readonly="1"
+                                        force_save="1"
+                                        sum="Importe total original"
+                                    />
+                                    <field
+                                        name="amount_unreconciled"
+                                        readonly="1"
+                                        force_save="1"
+                                        sum="Importe total sin conciliar"
+                                    />
+                                    <field name="reconcile" />
+                                    <field name="amount" sum="Importe total" />
+                                    <field name="unpaid_expense" column_invisible="1" />
+                                    <field name="move_line_id" column_invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="extra_info" string="Información adicional">
+                            <group>
+                                <field name="group_payment" />
+                            </group>
+                            <field name="account_payment_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="o_attachment_preview" />
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="customer_account_payment_advanced_tree" model="ir.ui.view">
+        <field name="name">customer.account.payment.advanced.tree</field>
+        <field name="model">account.payment.advanced</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date" />
+                <field name="amount" />
+                <field name="date_maturity" />
+                <field name="partner_id" />
+                <field name="communication" />
+                <field name="journal_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="customer_account_payment_advanced_search" model="ir.ui.view">
+        <field name="name">customer.account.payment.advanced.search</field>
+        <field name="model">account.payment.advanced</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name" string="Descripción" />
+                <field name="partner_id" string="Empresa" />
+                <field name="journal_id" string="Diario de pago" />
+                <field name="amount" />
+                <field name="communication" />
+                <separator />
+                <filter
+                    string="Borrador"
+                    name="state_draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    string="Publicado"
+                    name="state_posted"
+                    domain="[('state', '=', 'posted')]"
+                />
+                <separator />
+                <filter
+                    string="Enviado"
+                    name="state_sent"
+                    domain="[('is_move_sent', '=', True)]"
+                />
+                <filter string="Fecha de pago" name="date" date="date" />
+                <separator />
+                <field name="company_id" groups="base.group_multi_company" />
+                <filter
+                    string="Empresa"
+                    name="company"
+                    domain="[]"
+                    context="{'group_by': 'company_id'}"
+                    groups="base.group_multi_company"
+                />
+                <filter
+                    string="Cliente"
+                    name="partner"
+                    domain="[]"
+                    context="{'group_by': 'partner_id'}"
+                />
+                <filter
+                    string="Modo de pago"
+                    name="paymentmode"
+                    domain="[]"
+                    context="{'group_by': 'payment_mode_id'}"
+                />
+                <filter
+                    string="Diario"
+                    name="journal"
+                    domain="[]"
+                    context="{'group_by': 'journal_id'}"
+                />
+                <filter
+                    string="Moneda"
+                    name="currency"
+                    domain="[]"
+                    context="{'group_by': 'currency_id'}"
+                    groups="base.group_multi_currency"
+                />
+                <filter
+                    string="Estado"
+                    name="state"
+                    domain="[]"
+                    context="{'group_by': 'state'}"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="action_account_payments" model="ir.actions.act_window">
+        <field name="name">Pagos de clientes</field>
+        <field name="res_model">account.payment.advanced</field>
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('account_payment_advanced.customer_account_payment_advanced_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('account_payment_advanced.customer_account_payment_advanced_form')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('account.view_account_payment_graph')}),
+        ]"
+        />
+        <field name="context">
+            {'default_payment_type': 'inbound', 'default_partner_type': 'customer'}
+        </field>
+    </record>
+    <menuitem
+        id="menu_payment_advanced"
+        action="account_payment_advanced.action_account_payments"
+        name="Pagos de cliente"
+        parent="account.menu_finance_receivables"
+        sequence="14"
+    />
+</odoo>

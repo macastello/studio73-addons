@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="assign_packages_form" model="ir.ui.view">
+        <field name="name">assign.packages.form</field>
+        <field name="model">assign.packages</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="package_type_ids" />
+                </group>
+                <footer>
+                    <button
+                        name="assign_package"
+                        class="btn-primary"
+                        string="Generar Paquete"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

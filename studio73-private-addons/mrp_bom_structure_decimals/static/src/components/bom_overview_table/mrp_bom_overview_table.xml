@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<templates xml:space="preserve">
+    <tr
+        t-name="BomOverviewTable"
+        t-inherit="mrp.BomOverviewTable"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//td[contains(@t-esc, 'data.prod_cost')]" position="replace">
+            <td class="text-end">
+                <t
+                    t-esc="formatFloat(data.prod_cost / (data.quantity or 1), {'digits': [false, data.precision_digits]})"
+                />
+                <t t-esc="' €'" />
+            </td>
+        </xpath>
+        <xpath expr="//td[contains(@t-esc, 'data.bom_cost')]" position="replace">
+            <td class="text-end">
+                <t
+                    t-esc="formatFloat(data.bom_cost / (data.quantity or 1), {'digits': [false, data.precision_digits]})"
+                />
+                <t t-esc="' €'" />
+            </td>
+        </xpath>
+        <xpath expr="//td[contains(@t-esc, 'byproduct.prod_cost')]" position="replace">
+            <td class="text-end">
+                <t
+                    t-esc="formatFloat(byproduct.prod_cost / (byproduct.quantity or 1), {'digits': [false, byproduct.precision_digits]})"
+                />
+                <t t-esc="' €'" />
+            </td>
+        </xpath>
+        <xpath expr="//td[contains(@t-esc, 'byproduct.bom_cost')]" position="replace">
+            <td class="text-end">
+                <t
+                    t-esc="formatFloat(byproduct.bom_cost / (byproduct.quantity or 1), {'digits': [false, byproduct.precision_digits]})"
+                />
+                <t t-esc="' €'" />
+            </td>
+        </xpath>
+    </tr>
+</templates>

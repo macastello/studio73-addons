@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="account_payment_advanced_report_style">
+        <style>
+            .m0{
+                margin: 0 !important;
+            }
+
+            .mT20{
+                margin-top: 20px;
+            }
+
+            .mT30{
+                margin-top: 30px;
+            }
+
+            .p0{
+                padding: 0 !important;
+            }
+
+            ul{
+                list-style: none;
+            }
+
+            .header span{
+                font-size: 1.1em;
+            }
+
+            table tr,
+            table tr td{
+                font-size: 1.0em;
+            }
+        </style>
+    </template>
+    <template id="account_payment_advanced_report_document">
+        <div class="header">
+            <t
+                t-call="account_payment_advanced.account_payment_advanced_report_style"
+            />
+            <div class="row">
+                <div class="col-12 p0 mT20">
+                    <div class="col-3 p0">
+                        <img class="img-responsive logo" src="/logo.png" />
+                        <h5 class="text-left mT20">
+                            <div
+                                t-field="company.partner_id"
+                                t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'
+                            />
+                        </h5>
+                    </div>
+                    <div class="col-7 p0">
+                        <h3 class="m0">
+                            <b>Cobros de clientes</b>
+                        </h3>
+                        <div t-if="o.date_from or o.date_to" class="col-6 p0 mT20">
+                            <ul>
+                                <li t-if="o.date_from">
+                                    <span>- Desde:</span>
+                                    <b>
+                                        <span t-field="o.date_from" />
+                                    </b>
+                                </li>
+                                <li t-if="o.date_to">
+                                    <span>- Hasta:</span>
+                                    <b>
+                                        <span t-field="o.date_to" />
+                                    </b>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 p0 mT20">
+                            <ul>
+                                <li>
+                                    <span>- Países:</span>
+                                    <b>
+                                        <span
+                                            t-out="', '.join(country.name for country in o.country_ids) if o.country_ids else 'Todos'"
+                                        />
+                                    </b>
+                                </li>
+                                <li>
+                                    <span>- Métodos de pago:</span>
+                                    <b>
+                                        <span
+                                            t-out="', '.join(journal.name for journal in o.journal_ids) if o.journal_ids else 'Todos'"
+                                        />
+                                    </b>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-2 p0">
+                        <div class="text-right">
+                            <p t-out="time.strftime('%d/%m/%Y %H:%M:%S')" />
+                            <p>
+                                <span class="page" />
+                                /
+                                <span class="topage" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id" />
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company" />
+            </t>
+            <t
+                t-call="account_payment_advanced.account_payment_advanced_report_style"
+            />
+            <h2 t-out="country" />
+            <t t-set="total_country" t-value="0" />
+            <t t-foreach="docs[country]" t-as="journal_name">
+                <t t-set="total_journal" t-value="0" />
+                <h3 t-out="journal_name" />
+                <t t-set="payment_ids" t-value="docs[country][journal_name]" />
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Fecha de pago</th>
+                            <th>Vencimiento</th>
+                            <th class="text-right">Cantidad a pagar</th>
+                            <th>Banco</th>
+                            <th>Ref.</th>
+                            <th>Empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="get_payments(payment_ids)" t-as="line">
+                            <td>
+                                <span t-field="line.date" />
+                            </td>
+                            <td>
+                                <span t-field="line.date_maturity" />
+                            </td>
+                            <td class="text-right">
+                                <span
+                                    t-field="line.amount"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                                <t
+                                    t-set="total_journal"
+                                    t-value="total_journal + line.amount"
+                                />
+                            </td>
+                            <td
+                                style="max-width: 200px; min-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                            >
+                                <span t-field="line.partner_bank_id" />
+                            </td>
+                            <td
+                                style="max-width: 150px; min-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                            >
+                                <span t-field="line.communication" />
+                            </td>
+                            <td
+                                style="max-width: 300px; min-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                            >
+                                <span t-out="line.partner_id.display_name" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>
+                                CANTIDAD TOTAL A PAGAR DE
+                                <span t-out="journal_name" />
+                            </th>
+                            <th class="text-right">
+                                <span
+                                    t-out="total_journal"
+                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                                />
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <t t-set="total_country" t-value="total_country + total_journal" />
+            </t>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            <h3>
+                                CANTIDAD TOTAL A PAGAR EN
+                                <span t-out="country" />
+                            </h3>
+                        </th>
+                        <th class="text-right">
+                            <h3
+                                t-out="total_country"
+                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'
+                            />
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="footer" />
+    </template>
+    <template id="acc_paymnt_adv_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="country">
+                <t
+                    t-call="account_payment_advanced.account_payment_advanced_report_document"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>

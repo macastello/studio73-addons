@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_package_type_form" model="ir.ui.view">
+        <field name="name">stock.package.type.form.inherit</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='delivery']/group" position="inside">
+                <field name="quantity_by_package" />
+                <field name="allow_auto_create_packaging" />
+                <field name="package_sequence_id" />
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_package_type_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.package.type.tree.inherit</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="quantity_by_package" />
+            </xpath>
+            <xpath expr="//field[@name='height']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='width']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='packaging_length']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='max_weight']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_package_type_tree_delivery" model="ir.ui.view">
+        <field name="name">stock.package.type.tree.delivery</field>
+        <field name="model">stock.package.type</field>
+        <field
+            name="inherit_id"
+            ref="stock_delivery.stock_package_type_tree_delivery"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shipper_package_code']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
