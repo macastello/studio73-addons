@@ -32,21 +32,29 @@ class ProductTemplate(models.Model):
         if exclusions is None:
             exclusions = {}
         rule_obj = self.env["product.attribute.rule.line"]
-        ptva_obj = self.env["product.template.attribute.value"]
         attribute_values = (
             self.valid_product_template_attribute_line_ids.product_template_value_ids
         )
-        for ptav in attribute_values:
-            domain = self._get_affecting_rules_domain(no_values=True)
-            domain.append(("value_x", "=", ptav.product_attribute_value_id.id))
-            rule_ids = rule_obj.search(domain).value_y.ids
-            value_ids = ptva_obj.search(
+        attribute_values = attribute_values._only_active()
+        domain = self._get_affecting_rules_domain(no_values=True)
+        domain.append(
+            ("value_x", "in", attribute_values.product_attribute_value_id.ids)
+        )
+        rule_lines = rule_obj.search(domain)
+        if not rule_lines:
+            return exclusions
+        ptav_pav_map = {
+            ptav.product_attribute_value_id.id: ptav for ptav in attribute_values
+        }
+        for rule_line in rule_lines:
+            ptav = ptav_pav_map.get(rule_line.value_x.id)
+            exclusions.setdefault(ptav.id, []).extend(
                 [
-                    ("product_attribute_value_id", "in", rule_ids),
-                    ("product_tmpl_id", "=", self.id),
+                    ptav_pav_map.get(v_id.id).id
+                    for v_id in rule_line.value_y
+                    if ptav_pav_map.get(v_id.id)
                 ]
-            ).ids
-            exclusions.setdefault(ptav.id, []).extend(value_ids)
+            )
             exclusions[ptav.id] = list(set(exclusions[ptav.id]))
         return exclusions
 

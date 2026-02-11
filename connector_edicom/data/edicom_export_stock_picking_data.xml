@@ -1,0 +1,2962 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- data_version="1.2" -->
+<odoo noupdate="1">
+    <!-- prettier-ignore-start -->
+    <record id="edicom_export_picking_data" model="edicom.export.configuration">
+        <field name="name">3.0 EXPORTACIÓN ALBARANES EDICOM</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_config" model="edicom.export.configuration">
+        <field name="name">3.1 Configuración Cabecera Albarán</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_config" model="edicom.export.configuration">
+        <field name="name">3.2 Configuración Embalajes Albarán</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_config" model="edicom.export.configuration">
+        <field name="name">3.3 Configuración Líneas Albarán</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_localb_config" model="edicom.export.configuration">
+        <field name="name">3.4 Configuración Semáforo</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <!--  EMBALB.TXT -->
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_config" model="edicom.export.configuration">
+        <field name="name">3.2.1 Embalaje Camion</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_config" model="edicom.export.configuration">
+        <field name="name">3.2.2 Embalaje Pallet</field>
+        <field name="model" ref="connector_edicom.model_stock_picking"/>
+        <field name="version">1.0</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_picking_data"/>
+        <field name="name">EMBALB</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_embalb_config"/>
+    </record>
+
+    <!--  Cabecera de Albaranes  -->
+
+    <record id="edicom_export_stock_picking_data_cabalb_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_picking_data"/>
+        <field name="name">CABALB</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_cabalb_config"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CABALB</field>
+        <field name="fixed_value">CABALB</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">IDCAB</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMDES</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">TIPO</field>
+        <field name="fixed_value">351</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FUNCION</field>
+        <field name="fixed_value">9</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECDES</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECENT</field>
+        <field name="expression">${object.scheduled_date}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECENTSO</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECPANT</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECPDES</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_11" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CONESP</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_12" model="edicom.export.configuration.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMALB</field>
+        <field name="expression">${object.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_13" model="edicom.export.configuration.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECALB</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_14" model="edicom.export.configuration.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPED</field>
+        <field name="expression">${object.sale_id.client_order_ref}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_15" model="edicom.export.configuration.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECPED</field>
+        <field name="expression">${object.sale_id.date_order}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_16" model="edicom.export.configuration.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPICK</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_17" model="edicom.export.configuration.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECPICK</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_18" model="edicom.export.configuration.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ORIGEN</field>
+        <field name="expression">${object.company_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_19" model="edicom.export.configuration.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DESTINO</field>
+        <field name="required" eval="True"/>
+        <field name="expression">${object.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_20" model="edicom.export.configuration.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVEEDO</field>
+        <field name="expression">${object.company_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_21" model="edicom.export.configuration.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">COMPRADO</field>
+        <field name="expression">${object.sale_id.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_22" model="edicom.export.configuration.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DPTO</field>
+        <field name="expression">${object.sale_id.edicom_dept}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_23" model="edicom.export.configuration.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">RECEPTOR</field>
+        <field name="expression">${object.partner_id.edicom_ean13}</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_24" model="edicom.export.configuration.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">MUELLE</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_25" model="edicom.export.configuration.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PUNTENV</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_26" model="edicom.export.configuration.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">EXPEDIDO</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_27" model="edicom.export.configuration.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ULTCONS</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_28" model="edicom.export.configuration.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_29" model="edicom.export.configuration.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">REPOS</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_30" model="edicom.export.configuration.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PORTES</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_31" model="edicom.export.configuration.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">RECOGIDA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_32" model="edicom.export.configuration.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">TIPTRANS</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_33" model="edicom.export.configuration.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">IDTRANS</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_34" model="edicom.export.configuration.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">MATRIC</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_35" model="edicom.export.configuration.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">TOTQTY</field>
+        <field name="expression">${sum(m.quantity for m in object.move_line_ids)}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_36" model="edicom.export.configuration.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">IDENTIF</field>
+        <field name="fixed_value">X6</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_37" model="edicom.export.configuration.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CONSIG</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_38" model="edicom.export.configuration.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CIP</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_39" model="edicom.export.configuration.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECENVIO</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_40" model="edicom.export.configuration.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CODPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_41" model="edicom.export.configuration.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPLAENT</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_42" model="edicom.export.configuration.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBREEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_43" model="edicom.export.configuration.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NIFEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_44" model="edicom.export.configuration.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBRERECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_45" model="edicom.export.configuration.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NIFRECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_46" model="edicom.export.configuration.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBRECOMPRADOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_47" model="edicom.export.configuration.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBREPROVEEDOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_48" model="edicom.export.configuration.line">
+        <field name="sequence">47</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBREPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_49" model="edicom.export.configuration.line">
+        <field name="sequence">48</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">URLPUBLICADOR</field>
+        <field name="export_type">string</field>
+        <field name="size">150</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_50" model="edicom.export.configuration.line">
+        <field name="sequence">49</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMCONTRATO</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_51" model="edicom.export.configuration.line">
+        <field name="sequence">50</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ALTA/BAJA</field>
+        <field name="export_type">string</field>
+        <field name="size">1</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_52" model="edicom.export.configuration.line">
+        <field name="sequence">51</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_53" model="edicom.export.configuration.line">
+        <field name="sequence">52</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_54" model="edicom.export.configuration.line">
+        <field name="sequence">53</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIAEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_55" model="edicom.export.configuration.line">
+        <field name="sequence">54</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPEMISOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_56" model="edicom.export.configuration.line">
+        <field name="sequence">55</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONCOMPRADOR</field>
+        <field name="expression">${object.sale_id.partner_id.street}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_57" model="edicom.export.configuration.line">
+        <field name="sequence">56</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONCOMPRADOR</field>
+        <field name="expression">${object.sale_id.partner_id.city}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_58" model="edicom.export.configuration.line">
+        <field name="sequence">57</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIACOMPRADOR</field>
+        <field name="expression">${object.sale_id.partner_id.state_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_59" model="edicom.export.configuration.line">
+        <field name="sequence">58</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPCOMPRADOR</field>
+        <field name="expression">${object.sale_id.partner_id.zip}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_60" model="edicom.export.configuration.line">
+        <field name="sequence">59</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONPROVEEDOR</field>
+        <field name="expression">${object.company_id.partner_id.street}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_61" model="edicom.export.configuration.line">
+        <field name="sequence">60</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONPROVEEDOR</field>
+        <field name="expression">${object.company_id.partner_id.city}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_62" model="edicom.export.configuration.line">
+        <field name="sequence">61</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIAPROVEEDOR</field>
+        <field name="expression">${object.company_id.partner_id.state_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_63" model="edicom.export.configuration.line">
+        <field name="sequence">62</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPPROVEEDOR</field>
+        <field name="expression">${object.company_id.partner_id.zip}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_64" model="edicom.export.configuration.line">
+        <field name="sequence">63</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBREPTOEMISION</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_65" model="edicom.export.configuration.line">
+        <field name="sequence">64</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONPTOEMISION</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_66" model="edicom.export.configuration.line">
+        <field name="sequence">65</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONPTOEMISION</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_67" model="edicom.export.configuration.line">
+        <field name="sequence">66</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIAPTOEMISION</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_68" model="edicom.export.configuration.line">
+        <field name="sequence">67</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPPTOEMISION</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_69" model="edicom.export.configuration.line">
+        <field name="sequence">68</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_70" model="edicom.export.configuration.line">
+        <field name="sequence">69</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_71" model="edicom.export.configuration.line">
+        <field name="sequence">70</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIAPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_72" model="edicom.export.configuration.line">
+        <field name="sequence">71</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_73" model="edicom.export.configuration.line">
+        <field name="sequence">72</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBRETRANSPORTISTA</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_74" model="edicom.export.configuration.line">
+        <field name="sequence">73</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMBRECONSIGNATARIO</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_75" model="edicom.export.configuration.line">
+        <field name="sequence">74</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">DIRECCIONRECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_76" model="edicom.export.configuration.line">
+        <field name="sequence">75</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">POBLACIONRECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_77" model="edicom.export.configuration.line">
+        <field name="sequence">76</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PROVINCIARECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_78" model="edicom.export.configuration.line">
+        <field name="sequence">77</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CPRECEPTOR</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_79" model="edicom.export.configuration.line">
+        <field name="sequence">78</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NIFPROVEEDOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_80" model="edicom.export.configuration.line">
+        <field name="sequence">79</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">IMPTOTBRUTO</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_81" model="edicom.export.configuration.line">
+        <field name="sequence">80</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">IMPTOTNETO</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_82" model="edicom.export.configuration.line">
+        <field name="sequence">81</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">MONEDA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_83" model="edicom.export.configuration.line">
+        <field name="sequence">82</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECSAL</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_84" model="edicom.export.configuration.line">
+        <field name="sequence">83</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECSALEST</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_85" model="edicom.export.configuration.line">
+        <field name="sequence">84</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMCONREC</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_86" model="edicom.export.configuration.line">
+        <field name="sequence">85</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PESBRUTOT</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_87" model="edicom.export.configuration.line">
+        <field name="sequence">86</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PESNETTOT</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_88" model="edicom.export.configuration.line">
+        <field name="sequence">87</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMTOTBUL</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_89" model="edicom.export.configuration.line">
+        <field name="sequence">88</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CONEMB</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_90" model="edicom.export.configuration.line">
+        <field name="sequence">89</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECCONEMB</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_91" model="edicom.export.configuration.line">
+        <field name="sequence">90</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">REFTRANS</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_92" model="edicom.export.configuration.line">
+        <field name="sequence">91</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FECREFTRANS</field>
+        <field name="expression">${object.date_done}</field>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_93" model="edicom.export.configuration.line">
+        <field name="sequence">92</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PAISPROVEEDOR</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_94" model="edicom.export.configuration.line">
+        <field name="sequence">93</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PAISCOMPRADOR</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_95" model="edicom.export.configuration.line">
+        <field name="sequence">94</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PAISPTOENTREGA</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_96" model="edicom.export.configuration.line">
+        <field name="sequence">95</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ETAPATRANS</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_97" model="edicom.export.configuration.line">
+        <field name="sequence">96</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">MEDIOTRANS</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_98" model="edicom.export.configuration.line">
+        <field name="sequence">97</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CONDENTREG</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_99" model="edicom.export.configuration.line">
+        <field name="sequence">98</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PAISPUNTENV</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_100" model="edicom.export.configuration.line">
+        <field name="sequence">99</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CLIENTE</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_101" model="edicom.export.configuration.line">
+        <field name="sequence">100</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">PAGADOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_102" model="edicom.export.configuration.line">
+        <field name="sequence">101</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">CODPAIS</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_103" model="edicom.export.configuration.line">
+        <field name="sequence">102</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NOMCONTACTOPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_104" model="edicom.export.configuration.line">
+        <field name="sequence">103</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">EMAILCONTACTPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">50</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_105" model="edicom.export.configuration.line">
+        <field name="sequence">104</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">TELCONTACTPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_106" model="edicom.export.configuration.line">
+        <field name="sequence">105</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">FAXCONTACTPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_107" model="edicom.export.configuration.line">
+        <field name="sequence">106</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">WWWCONTACTPROV</field>
+        <field name="export_type">string</field>
+        <field name="size">100</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_1087" model="edicom.export.configuration.line">
+        <field name="sequence">107</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPEDCOM</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_109" model="edicom.export.configuration.line">
+        <field name="sequence">108</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPEDREAP</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_110" model="edicom.export.configuration.line">
+        <field name="sequence">109</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">ORDENADOR</field>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_cabalb_line_111" model="edicom.export.configuration.line">
+        <field name="sequence">110</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_cabalb_config"/>
+        <field name="name">NUMPEDCLI</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+    </record>
+
+    <!-- Embalaje Camion  -->
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_config"/>
+        <field name="name">EmbAlmCam</field>
+        <field name='repeat_expression'>object</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">EMBALB</field>
+        <field name="fixed_value">EMBALB</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">IDCAB</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">10</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">IDEMB</field>
+        <field name="fixed_value">1</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">10</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">CPS</field>
+        <field name="fixed_value">1</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">CPSPADRE</field>
+        <field name="fixed_value"></field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">CANTEMB</field>
+        <field name="expression">${len(object.move_line_ids.mapped('result_package_id'))}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="required" eval="True"/>
+        <field name="decimal_size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">TIPCOD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">COSEMB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_camion_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_camion_config"/>
+        <field name="name">TIPEMB</field>
+        <field name='fixed_value'>201</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">3</field>
+    </record>
+
+    <!-- Embalaje Pallet  -->
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_config"/>
+        <field name="name">EmbAlmPal</field>
+        <field name='repeat_expression'>object.move_line_ids.mapped('result_package_id')</field>
+        <field name="export_type">subconfig</field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">EMBALB</field>
+        <field name="fixed_value">EMBALB</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">IDCAB</field>
+        <field name="expression">${object.get_related_picking().id}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">10</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">IDEMB</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">10</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">CPS</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">CPSPADRE</field>
+        <field name="fixed_value">1</field>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">CANTEMB</field>
+        <field name="expression">${len(object.quant_ids) or 0}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="required" eval="True"/>
+        <field name="decimal_size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">TIPCOD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">COSEMB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">TIPEMB</field>
+        <field name='fixed_value'>201</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">DESCEMB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_11" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">PAGRET</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_12" model="edicom.export.configuration.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">PESON</field>
+        <field name="expression">${sum(q.quantity * q.product_id.weight_uom_id._compute_quantity(q.product_id.net_weight, object.env.ref('uom.product_uom_kgm')) for q in object.quant_ids)}</field>
+        <field name="export_type">float</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_13" model="edicom.export.configuration.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">PESOB</field>
+        <field name="expression">${object.estimated_pack_weight_kg}</field>
+        <field name="export_type">float</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_14" model="edicom.export.configuration.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">PESONU</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_15" model="edicom.export.configuration.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">PESOBU</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_16" model="edicom.export.configuration.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">UPESO</field>
+        <field name="fixed_value">KGM</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_17" model="edicom.export.configuration.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">ALTURA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_18" model="edicom.export.configuration.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">LONGITUD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_19" model="edicom.export.configuration.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">ANCHURA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_20" model="edicom.export.configuration.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">UMEDIDA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_21" model="edicom.export.configuration.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">CANCONSI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_22" model="edicom.export.configuration.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">MANIPUL</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_23" model="edicom.export.configuration.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">DESCMANI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">70</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_24" model="edicom.export.configuration.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">SSCC1</field>
+        <field name="expression">${object.name}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="True"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_25" model="edicom.export.configuration.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">SSCC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_26" model="edicom.export.configuration.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">SSCC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_27" model="edicom.export.configuration.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">SSCC4</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_28" model="edicom.export.configuration.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">SSCC5</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_29" model="edicom.export.configuration.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">LOTE</field>
+        <field name="expression">${object.quant_ids and object.quant_ids[0].lot_id.name or ''}</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_30" model="edicom.export.configuration.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">TIPO2</field>
+        <field name="fixed_value">CT</field>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_31" model="edicom.export.configuration.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">TCAJAS</field>
+        <field name="expression">${object.quant_ids and object.quant_ids[0].quantity / (object.quant_ids[0].product_packaging_id.qty or 1) or 0}</field>
+        <field name="export_type">integer</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_32" model="edicom.export.configuration.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">DESTDIF</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_33" model="edicom.export.configuration.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">FECMAT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_34" model="edicom.export.configuration.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">FECCAD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_35" model="edicom.export.configuration.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">FECCON</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">12</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_36" model="edicom.export.configuration.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">VOLUMEN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_37" model="edicom.export.configuration.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">BULTFORM</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_38" model="edicom.export.configuration.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">BULTPALET</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_39" model="edicom.export.configuration.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">FORMATO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">3</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_40" model="edicom.export.configuration.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">NUMFORMATO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_41" model="edicom.export.configuration.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">NUMCAPAS</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_42" model="edicom.export.configuration.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">GRAI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_43" model="edicom.export.configuration.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">REFTRANS</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">35</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_embalb_pallet_line_44" model="edicom.export.configuration.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_embalb_pallet_config"/>
+        <field name="name">FECREFTRANS</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="required" eval="False"/>
+        <field name="size">12</field>
+    </record>
+
+    <!--  LINALB.TXT  -->
+
+    <record id="edicom_export_stock_picking_data_linalb_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_picking_data"/>
+        <field name="name">LINALB</field>
+        <field name="export_type">subconfig</field>
+        <field name="repeat_expression">object.move_line_ids</field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_linalb_config"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LINALB</field>
+        <field name="fixed_value">LINALB</field>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IDCAB</field>
+        <field name="expression">${object.picking_id.id}</field>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_3" model="edicom.export.configuration.line">
+        <field name="sequence">2</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IDEMB</field>
+        <field name="expression">${object.result_package_id.id}</field>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_4" model="edicom.export.configuration.line">
+        <field name="sequence">3</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IDLIN</field>
+        <field name="expression">${object.id}</field>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_5" model="edicom.export.configuration.line">
+        <field name="sequence">4</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">EAN</field>
+        <field name="expression">${object.product_id.barcode}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_6" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">VP</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">2</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_7" model="edicom.export.configuration.line">
+        <field name="sequence">6</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">REFPROV</field>
+        <field name="expression">${object.product_id.default_code}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_8" model="edicom.export.configuration.line">
+        <field name="sequence">7</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">REFCLI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="required" eval="False"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_9" model="edicom.export.configuration.line">
+        <field name="sequence">8</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SERIE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_10" model="edicom.export.configuration.line">
+        <field name="sequence">9</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMEXP</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_11" model="edicom.export.configuration.line">
+        <field name="sequence">10</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">DESCRIP</field>
+        <field name="expression">${object.product_id.with_context(display_default_code=False).display_name}</field>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_12" model="edicom.export.configuration.line">
+        <field name="sequence">11</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TIPART</field>
+        <field name="fixed_value">CU</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_13" model="edicom.export.configuration.line">
+        <field name="sequence">12</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CENVFAC</field>
+        <field name="expression">${object.quantity}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="required" eval="True"/>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_14" model="edicom.export.configuration.line">
+        <field name="sequence">13</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CENVGRA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_15" model="edicom.export.configuration.line">
+        <field name="sequence">14</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANGRUSU</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_16" model="edicom.export.configuration.line">
+        <field name="sequence">15</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CUEXP</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_17" model="edicom.export.configuration.line">
+        <field name="sequence">16</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UNICANT</field>
+        <field name="fixed_value">PCE</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_18" model="edicom.export.configuration.line">
+        <field name="sequence">17</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TEXTO1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_19" model="edicom.export.configuration.line">
+        <field name="sequence">18</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TEXTO2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_20" model="edicom.export.configuration.line">
+        <field name="sequence">19</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TEXTO3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_21" model="edicom.export.configuration.line">
+        <field name="sequence">20</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TEXTO4</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_22" model="edicom.export.configuration.line">
+        <field name="sequence">21</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TEXTO5</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_23" model="edicom.export.configuration.line">
+        <field name="sequence">22</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMPED</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_24" model="edicom.export.configuration.line">
+        <field name="sequence">23</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMALB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_25" model="edicom.export.configuration.line">
+        <field name="sequence">24</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SSCC1</field>
+        <field name="expression"></field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_26" model="edicom.export.configuration.line">
+        <field name="sequence">25</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SSCC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_27" model="edicom.export.configuration.line">
+        <field name="sequence">26</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SSCC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_28" model="edicom.export.configuration.line">
+        <field name="sequence">27</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SSCC4</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_29" model="edicom.export.configuration.line">
+        <field name="sequence">28</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">SSCC5</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_30" model="edicom.export.configuration.line">
+        <field name="sequence">29</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECENV</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_31" model="edicom.export.configuration.line">
+        <field name="sequence">30</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCON</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_32" model="edicom.export.configuration.line">
+        <field name="sequence">31</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LOTE</field>
+        <field name="expression">${object.lot_id.name}</field>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_33" model="edicom.export.configuration.line">
+        <field name="sequence">32</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTLOTE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_34" model="edicom.export.configuration.line">
+        <field name="sequence">33</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LUGAR1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_35" model="edicom.export.configuration.line">
+        <field name="sequence">34</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECLOC1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_36" model="edicom.export.configuration.line">
+        <field name="sequence">35</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTLOC1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_37" model="edicom.export.configuration.line">
+        <field name="sequence">36</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LUGAR2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_38" model="edicom.export.configuration.line">
+        <field name="sequence">37</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECLOC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_39" model="edicom.export.configuration.line">
+        <field name="sequence">38</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTLOC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_40" model="edicom.export.configuration.line">
+        <field name="sequence">39</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LUGAR3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_41" model="edicom.export.configuration.line">
+        <field name="sequence">40</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECLOC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_42" model="edicom.export.configuration.line">
+        <field name="sequence">41</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTLOC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_43" model="edicom.export.configuration.line">
+        <field name="sequence">42</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">DESTINO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_44" model="edicom.export.configuration.line">
+        <field name="sequence">43</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECPED</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_45" model="edicom.export.configuration.line">
+        <field name="sequence">44</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECALB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_46" model="edicom.export.configuration.line">
+        <field name="sequence">45</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMLINPED</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">6</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_47" model="edicom.export.configuration.line">
+        <field name="sequence">46</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMLINALB</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">6</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_48" model="edicom.export.configuration.line">
+        <field name="sequence">47</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PESTOTLIN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_49" model="edicom.export.configuration.line">
+        <field name="sequence">48</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTPED</field>
+        <field name="expression">${object.sale_line.product_uom_qty}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_50" model="edicom.export.configuration.line">
+        <field name="sequence">49</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UNICANTPED</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_51" model="edicom.export.configuration.line">
+        <field name="sequence">50</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMCROTAL</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_52" model="edicom.export.configuration.line">
+        <field name="sequence">51</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">TARIFA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_53" model="edicom.export.configuration.line">
+        <field name="sequence">52</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECMAT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_54" model="edicom.export.configuration.line">
+        <field name="sequence">53</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCAD</field>
+        <field name="expression">${object.result_package_id.quant_ids and object.result_package_id.quant_ids[0].lot_id.expiration_date or ''}</field>
+        <field name="fixed_value"/>
+        <field name="export_type">datetime</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+        <field name="required" eval="True"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_55" model="edicom.export.configuration.line">
+        <field name="sequence">54</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCONPR</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_56" model="edicom.export.configuration.line">
+        <field name="sequence">55</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">REGMATADERO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_57" model="edicom.export.configuration.line">
+        <field name="sequence">56</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">REGDESPIECE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_58" model="edicom.export.configuration.line">
+        <field name="sequence">57</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">MATADERO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_59" model="edicom.export.configuration.line">
+        <field name="sequence">58</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">DESPIECE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_60" model="edicom.export.configuration.line">
+        <field name="sequence">59</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PNACIMIENTO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_61" model="edicom.export.configuration.line">
+        <field name="sequence">60</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PORIGEN</field>
+        <field name="fixed_value">ES</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_62" model="edicom.export.configuration.line">
+        <field name="sequence">61</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PCEBADO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_63" model="edicom.export.configuration.line">
+        <field name="sequence">62</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PMATANZA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_64" model="edicom.export.configuration.line">
+        <field name="sequence">63</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PELABORACION</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_65" model="edicom.export.configuration.line">
+        <field name="sequence">64</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PDESPIECE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_66" model="edicom.export.configuration.line">
+        <field name="sequence">65</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECFABET</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_67" model="edicom.export.configuration.line">
+        <field name="sequence">66</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCADET</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_68" model="edicom.export.configuration.line">
+        <field name="sequence">67</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PESOBRUTO</field>
+        <field name="expression">${object.product_id.product_weight * object.quantity}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_69" model="edicom.export.configuration.line">
+        <field name="sequence">68</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PESONETO</field>
+        <field name="expression">${object.product_id.net_weight * object.quantity or object.product_id.product_weight * object.quantity}</field>
+        <field name="export_type">float</field>
+        <field name="size">15</field>
+        <field name="decimal_size">3</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_70" model="edicom.export.configuration.line">
+        <field name="sequence">69</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">URLPUBLICADOR</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">150</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_71" model="edicom.export.configuration.line">
+        <field name="sequence">70</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECHABAJA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_72" model="edicom.export.configuration.line">
+        <field name="sequence">71</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECHANACIMIENTO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_73" model="edicom.export.configuration.line">
+        <field name="sequence">72</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">REGSALAENVASADO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_74" model="edicom.export.configuration.line">
+        <field name="sequence">73</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IDSALAENVASADO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_75" model="edicom.export.configuration.line">
+        <field name="sequence">74</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CATEGORIA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_76" model="edicom.export.configuration.line">
+        <field name="sequence">75</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECHACONFECCION</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_77" model="edicom.export.configuration.line">
+        <field name="sequence">76</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTIDADUE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_78" model="edicom.export.configuration.line">
+        <field name="sequence">77</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECHAALTA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_79" model="edicom.export.configuration.line">
+        <field name="sequence">78</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECMATET</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_80" model="edicom.export.configuration.line">
+        <field name="sequence">79</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMLOC1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_81" model="edicom.export.configuration.line">
+        <field name="sequence">80</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMLOC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_82" model="edicom.export.configuration.line">
+        <field name="sequence">81</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMLOC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_83" model="edicom.export.configuration.line">
+        <field name="sequence">82</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMDESTINO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_84" model="edicom.export.configuration.line">
+        <field name="sequence">83</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PROPMERC</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_85" model="edicom.export.configuration.line">
+        <field name="sequence">84</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PBRUTOLOTE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_86" model="edicom.export.configuration.line">
+        <field name="sequence">85</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PNETOLOTE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_87" model="edicom.export.configuration.line">
+        <field name="sequence">86</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UMEDIDAPES</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_88" model="edicom.export.configuration.line">
+        <field name="sequence">87</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">EANCONT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_89" model="edicom.export.configuration.line">
+        <field name="sequence">88</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PNETOUNIT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_90" model="edicom.export.configuration.line">
+        <field name="sequence">89</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UPNETOUNIT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_91" model="edicom.export.configuration.line">
+        <field name="sequence">90</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">ALTURA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_92" model="edicom.export.configuration.line">
+        <field name="sequence">91</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">LONGITUD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_93" model="edicom.export.configuration.line">
+        <field name="sequence">92</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PROFUND</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_94" model="edicom.export.configuration.line">
+        <field name="sequence">93</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UMEDIDA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_95" model="edicom.export.configuration.line">
+        <field name="sequence">94</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CADUCTOT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_96" model="edicom.export.configuration.line">
+        <field name="sequence">95</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CADUCMIN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_97" model="edicom.export.configuration.line">
+        <field name="sequence">96</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PESTOTBRULIN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_98" model="edicom.export.configuration.line">
+        <field name="sequence">97</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">RELLOC1</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_99" model="edicom.export.configuration.line">
+        <field name="sequence">98</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">RELLOC2</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_100" model="edicom.export.configuration.line">
+        <field name="sequence">99</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">RELLOC3</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_101" model="edicom.export.configuration.line">
+        <field name="sequence">100</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">RELDESTINO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_102" model="edicom.export.configuration.line">
+        <field name="sequence">101</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">ISBN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_103" model="edicom.export.configuration.line">
+        <field name="sequence">102</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">QVRCANT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_104" model="edicom.export.configuration.line">
+        <field name="sequence">103</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">QVRCOD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_105" model="edicom.export.configuration.line">
+        <field name="sequence">104</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">QVRMOTIVO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_106" model="edicom.export.configuration.line">
+        <field name="sequence">105</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CANTDEV</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_107" model="edicom.export.configuration.line">
+        <field name="sequence">106</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMPEDCLILIN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_108" model="edicom.export.configuration.line">
+        <field name="sequence">107</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CODFAO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_109" model="edicom.export.configuration.line">
+        <field name="sequence">108</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IMPNETOLIN</field>
+        <field name="expression">${object.sale_price_subtotal}</field>
+        <field name="export_type">float</field>
+        <field name="size">18</field>
+        <field name="decimal_size">2</field>
+        <field name="alignment">right</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_110" model="edicom.export.configuration.line">
+        <field name="sequence">109</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">METPROD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_111" model="edicom.export.configuration.line">
+        <field name="sequence">110</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">ARTPESCA</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_112" model="edicom.export.configuration.line">
+        <field name="sequence">111</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CONGELADO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_113" model="edicom.export.configuration.line">
+        <field name="sequence">112</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCONGEL</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_114" model="edicom.export.configuration.line">
+        <field name="sequence">113</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMBUQUE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_115" model="edicom.export.configuration.line">
+        <field name="sequence">114</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMBUQUE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_116" model="edicom.export.configuration.line">
+        <field name="sequence">115</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">MATBUQUE</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_117" model="edicom.export.configuration.line">
+        <field name="sequence">116</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMUNIDAD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_118" model="edicom.export.configuration.line">
+        <field name="sequence">117</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMUNIDAD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_119" model="edicom.export.configuration.line">
+        <field name="sequence">118</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">ZONCAPT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_120" model="edicom.export.configuration.line">
+        <field name="sequence">119</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">ZONCAPTISO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_121" model="edicom.export.configuration.line">
+        <field name="sequence">120</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCAPT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_122" model="edicom.export.configuration.line">
+        <field name="sequence">121</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECCAPTFIN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_123" model="edicom.export.configuration.line">
+        <field name="sequence">122</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECPROD</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_124" model="edicom.export.configuration.line">
+        <field name="sequence">123</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMPUERTO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_125" model="edicom.export.configuration.line">
+        <field name="sequence">124</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMPUERTO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_126" model="edicom.export.configuration.line">
+        <field name="sequence">125</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">FECDESEMBARCO</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">12</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_127" model="edicom.export.configuration.line">
+        <field name="sequence">126</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NUMSACRI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">25</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_128" model="edicom.export.configuration.line">
+        <field name="sequence">127</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">NOMSACRI</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_129" model="edicom.export.configuration.line">
+        <field name="sequence">128</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">CERTSOS</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">35</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_130" model="edicom.export.configuration.line">
+        <field name="sequence">129</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">INGREDIENTES</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">280</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_131" model="edicom.export.configuration.line">
+        <field name="sequence">130</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">IDIOMAINGR</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_132" model="edicom.export.configuration.line">
+        <field name="sequence">131</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">DESCRIPCIENT</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">70</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_133" model="edicom.export.configuration.line">
+        <field name="sequence">132</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">PRESENTACION</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">17</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_134" model="edicom.export.configuration.line">
+        <field name="sequence">133</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">VOLUMENN</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_linalb_line_135" model="edicom.export.configuration.line">
+        <field name="sequence">134</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_linalb_config"/>
+        <field name="name">UMEDIDAVOL</field>
+        <field name="fixed_value">LTR</field>
+        <field name="export_type">string</field>
+        <field name="size">3</field>
+        <field name="alignment">left</field>
+    </record>
+
+    <!--  semaforo.TXT  -->
+
+    <record id="edicom_export_stock_picking_data_localb_subconfig" model="edicom.export.configuration.line">
+        <field name="sequence">5</field>
+        <field name="export_config_id" ref="edicom_export_picking_data"/>
+        <field name="name">semaforo</field>
+        <field name="export_type">subconfig</field>
+        <field name="repeat_expression"></field>
+        <field name="sub_config" ref="edicom_export_stock_picking_data_localb_config"/>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_localb_line_1" model="edicom.export.configuration.line">
+        <field name="sequence">0</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_localb_config"/>
+        <field name="name">semaforo</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">15</field>
+    </record>
+
+    <record id="edicom_export_stock_picking_data_localb_line_2" model="edicom.export.configuration.line">
+        <field name="sequence">1</field>
+        <field name="export_config_id" ref="edicom_export_stock_picking_data_localb_config"/>
+        <field name="name">semaforo</field>
+        <field name="fixed_value"/>
+        <field name="export_type">string</field>
+        <field name="size">10</field>
+    </record>
+    <!-- prettier-ignore-end -->
+</odoo>

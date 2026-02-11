@@ -89,35 +89,55 @@ class EdicomExportMixin(models.AbstractModel):
     def _format_date(self, value, time=False):
         if not value:
             return ""
+        if isinstance(value, str) and "." in value:
+            value = value.split(".")[0]
         formatd = "%Y%m%d%H%M" if time else "%Y%m%d"
         date = fields.Datetime.from_string(value)
         return date.strftime(formatd)
 
     def _export_line_process(self, obj, line):
+        def _raise_error(msg):
+            msg = _(
+                "Error while evaluating expression: (%(expression)s) "
+                "in line sequence %(sequence)s "
+                "of Export Configuration %(export_config_id)s"
+            ) % {
+                "expression": line.expression,
+                "sequence": line.sequence,
+                "export_config_id": line.export_config_id.name,
+            }
+            raise exceptions.UserError(msg)
+
         obj_merge = obj
 
         def merge(match):
             exp = match.group(1).strip().replace("\n", "")
-            result = safe_eval(
-                exp,
-                {
-                    "user": self.env.user,
-                    "object": obj_merge,
-                    "context": self.env.context.copy(),
-                },
-            )
-            return tools.ustr(result) if result or isinstance(result, float) else ""
+            try:
+                result = safe_eval(
+                    exp,
+                    {
+                        "user": self.env.user,
+                        "object": obj_merge,
+                        "context": self.env.context.copy(),
+                    },
+                )
+                return tools.ustr(result) if result or isinstance(result, float) else ""
+            except Exception as e:
+                _raise_error(e)
 
         def merge2(expression):
-            result = safe_eval(
-                expression,
-                {
-                    "user": self.env.user,
-                    "object": obj_merge,
-                    "context": self.env.context.copy(),
-                },
-            )
-            return result or []
+            try:
+                result = safe_eval(
+                    expression,
+                    {
+                        "user": self.env.user,
+                        "object": obj_merge,
+                        "context": self.env.context.copy(),
+                    },
+                )
+                return result or []
+            except Exception as e:
+                _raise_error(e)
 
         res = []
         if line.conditional_expression:
@@ -209,7 +229,7 @@ class EdicomExportMixin(models.AbstractModel):
             )
             if res:
                 record.message_post(
-                    body=_("Exportación al servidor Ediwin completada"),
+                    body=_("Exportación al servidor Edicom completada"),
                     message_type="comment",
                     subtype_xmlid="mail.mt_note",
                 )

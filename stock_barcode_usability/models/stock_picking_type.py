@@ -80,6 +80,12 @@ class StockPickingType(models.Model):
         "albarán",
         copy=False,
     )
+    stock_barcode_restrict_location = fields.Boolean(
+        string="Restricción de ubicación",
+        help="Si se marca la casilla, solo se permitirá escanear ubicaciones que "
+        "estén presentes en las líneas del albarán/lote.",
+        copy=False,
+    )
 
     def _get_barcode_config(self):
         self.ensure_one()
@@ -96,6 +102,7 @@ class StockPickingType(models.Model):
                 "stock_barcode_restrict_products": self.stock_barcode_restrict_products,
                 "allow_any_dest_location": self.stock_barcode_allow_any_dest_location,
                 "apply_dest_location_all_lines": self.apply_dest_location_all_lines,
+                "stock_barcode_restrict_location": self.stock_barcode_restrict_location,
             }
         )
         return config

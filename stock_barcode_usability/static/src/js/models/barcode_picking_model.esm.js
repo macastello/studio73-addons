@@ -289,6 +289,45 @@ patch(BarcodePickingModel.prototype, {
     },
 
     _checkBarcode(barcodeData) {
+        if (
+            this.config.restrict_scan_source_location &&
+            this.config.stock_barcode_restrict_location
+        ) {
+            if (barcodeData.location) {
+                const isValidLocation = this.pageLines.some(
+                    (l) => l.location_id.id === barcodeData.location.id
+                );
+                if (!isValidLocation) {
+                    return {
+                        error: true,
+                        message: _t(
+                            "The scanned location is not available in this operation. Please scan the correct location."
+                        ),
+                    };
+                }
+            } else if (barcodeData.product) {
+                if (!this.location) {
+                    return {
+                        error: true,
+                        message: _t("Please scan the origin location first."),
+                    };
+                }
+                const productLines = this.pageLines.filter(
+                    (l) => l.product_id.id === barcodeData.product.id
+                );
+                if (
+                    productLines.length &&
+                    !productLines.some((l) => l.location_id.id === this.location.id)
+                ) {
+                    return {
+                        error: true,
+                        message: _t(
+                            "The scanned product belongs to another location. Please scan the correct location first."
+                        ),
+                    };
+                }
+            }
+        }
         let product_updated = false;
         if (
             this.config.restrict_scan_product &&
@@ -304,5 +343,37 @@ patch(BarcodePickingModel.prototype, {
             delete barcodeData.product;
         }
         return res;
+    },
+
+    getDisplayIncrementBtn(line) {
+        const superRes = super.getDisplayIncrementBtn(line);
+        return this._check_restrict_scan_product_and_location(superRes, line);
+    },
+
+    getDisplayIncrementPackagingBtn(line) {
+        const superRes = super.getDisplayIncrementPackagingBtn(line);
+        return this._check_restrict_scan_product_and_location(superRes, line);
+    },
+
+    lineCanBeEdited(line) {
+        const superRes = super.lineCanBeEdited(line);
+        return this._check_restrict_scan_product_and_location(superRes, line);
+    },
+
+    _check_restrict_scan_product_and_location(superRes, line) {
+        if (
+            !superRes ||
+            !this.config.restrict_scan_product ||
+            !(
+                this.config.restrict_scan_source_location &&
+                this.config.stock_barcode_restrict_location
+            )
+        ) {
+            return superRes;
+        }
+        if (this.location && line.location_id.id !== this.location.id) {
+            return false;
+        }
+        return superRes;
     },
 });

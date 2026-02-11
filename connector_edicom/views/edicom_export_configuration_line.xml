@@ -49,6 +49,26 @@
         </field>
     </record>
 
+    <!-- Search View -->
+    <record id="view_search_edicom_export_configuration_line" model="ir.ui.view">
+        <field name="name">edicom.export.configuration.line.search</field>
+        <field name="model">edicom.export.configuration.line</field>
+        <field name="arch" type="xml">
+            <search string="Edicom Export Configuration Line">
+                <field name="name" />
+                <field name="export_config_id" />
+                <separator />
+                <group name="groupby">
+                    <filter
+                        name="export_config_id_groupby"
+                        string="Export Configuration"
+                        context="{'group_by': 'export_config_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- Action -->
     <record id="action_edicom_export_configuration_line" model="ir.actions.act_window">
         <field name="name">Edicom Export Configuration Lines</field>

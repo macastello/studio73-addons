@@ -12,6 +12,7 @@
                             <field name="edicom_ean13" />
                             <field name="eci_buyer_code" />
                             <field name="edicom_export_invoice_path" />
+                            <field name="edicom_export_picking_path" />
                         </group>
                         <group />
                     </group>

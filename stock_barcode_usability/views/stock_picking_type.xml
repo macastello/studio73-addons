@@ -33,6 +33,16 @@
                     groups="stock.group_stock_multi_locations"
                 />
             </xpath>
+            <xpath
+                expr="//field[@name='restrict_scan_source_location']"
+                position="after"
+            >
+                <field
+                    name="stock_barcode_restrict_location"
+                    invisible="restrict_scan_source_location == 'no'"
+                    groups="stock.group_stock_multi_locations"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>

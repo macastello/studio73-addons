@@ -32,6 +32,8 @@ class AccountMove(models.Model):
 
     def action_post(self):
         res = super().action_post()
+        if isinstance(res, dict):
+            return res
         for move in self:
             partner = move.partner_id
             partner_shipping = move.partner_shipping_id

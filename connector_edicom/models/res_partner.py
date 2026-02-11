@@ -20,3 +20,9 @@ class ResPartner(models.Model):
         default="./PRODUCCION/SALIDA/",
         tracking=True,
     )
+    edicom_export_picking_path = fields.Char(
+        string="Ruta exportación albaranes",
+        help="Ruta donde se exportarán los ficheros de los albaranes",
+        default="./PRODUCCION/SALIDA/Albaranes",
+        tracking=True,
+    )

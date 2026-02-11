@@ -9,12 +9,12 @@ Stock Barcode Usability
 - Mejoras de usabilidad en la interfaz de código de barras:
 
     - Añade la posibilidad de ocultar el botón de añadir producto en PDA [1]
-    - Añade un campo a tipos de operaciones para permitir introducir más cantidad de la 
+    - Añade un campo a tipos de operaciones para permitir introducir más cantidad de la
       reservada.
     - Modifica el proceso de escaneo de paquete en albaranes de modo que lo asigne como
       destino si está totalmente contenido en el albarán incluso si la línea venía
       prereservada.
-    - Añade la posibilidad de forzar sumar unidad al escanear un producto en PDA en 
+    - Añade la posibilidad de forzar sumar unidad al escanear un producto en PDA en
       albaranes y ajsutes de inventario incluso si este tiene seguimiento por lotes. [3]
     - Se añade la posibilidad de cerrar una agrupación siempre que se pulse validar,
       incluso si no se ha validado por completo [4]. Útil para los que usan el módulo
@@ -29,7 +29,13 @@ Stock Barcode Usability
     - Añade un campo `Agrupar líneas por ubicación y producto` en tipos de operaciones
       que agrupa las líneas en la PDA por ubicación y producto, de modo que si hay
       varias ubicaciones con el mismo producto se muestran como líneas separadas.
-      Útil para evitar errores al picar en ubicaciones con stock mixto.
+      Útil para evitar errores al picar en ubicaciones con stock mixto. [9]
+    - Añade la posibilidad de permitir escanear cualquier ubicación destino,
+      independientemente de si cuelga o no de la ubicación destino del albarán/tipo de
+      operación. [10]
+    - Añade una restricción estricta de ubicación origen. Si se activa junto con
+      "Escaneo obligatorio de origen", solo permite escanear ubicaciones que estén
+      presentes en las líneas del albarán/lote. [11]
 
 
 Configuration
@@ -48,6 +54,8 @@ Configuration
 - [8] En tipos de operaciones marcar el campo `PDA: Aplicar ubicación destino a todas las líneas`
 - [9] En tipos de operaciones marcar el campo `Agrupar líneas por ubicación y producto` para activar
   la agrupación de líneas por ubicación y producto en la PDA.
+- [10] En tipos de operaciones marcar el campo `Permitir cualquier ubicación destino`.
+- [11] En tipos de operaciones marcar el campo `Restricción de ubicación`.
 
 
 Bug Tracker

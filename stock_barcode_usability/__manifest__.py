@@ -8,7 +8,7 @@
     "author": "Studio73",
     "website": "https://github.com/Studio73/stock-addons",
     "category": "Barcode",
-    "version": "17.0.1.7.0",
+    "version": "17.0.1.8.1",
     "depends": ["stock_barcode_picking_batch"],
     "data": [
         "views/res_config_settings.xml",
@@ -17,6 +17,9 @@
     "assets": {
         "web.assets_backend": [
             "/stock_barcode_usability/static/src/**/*",
+        ],
+        "web.qunit_suite_tests": [
+            "/stock_barcode_usability/static/tests/units/**/*",
         ],
     },
     "installable": True,

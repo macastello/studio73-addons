@@ -1,0 +1,283 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_barcode_usability
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-13 07:43+0000\n"
+"PO-Revision-Date: 2026-01-13 07:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_groupby_loc_and_prod
+msgid "Agrupar líneas por ubicación y producto"
+msgstr "Regrouper les lignes par emplacement et produit"
+
+#. module: stock_barcode_usability
+#: model:ir.model,name:stock_barcode_usability.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: stock_barcode_usability
+#: model:ir.model,name:stock_barcode_usability.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__apply_dest_location_all_lines
+msgid ""
+"En la vista tablet de código de barras de agrupaciones si se activa este "
+"check, cuando se escanee la ubicación destino se aplicará a todas las líneas"
+" con cantidad en hecho incluso si esta no cuelga de la ubicación destino del"
+" albarán"
+msgstr ""
+"Si ce champ est coché, dans la vue tablette de code de barre de groupes, "
+"quand on scanne l'emplacement destination, on appliquera à toutes les "
+"lignes avec quantité en fait même si elle ne culeurre pas de l'emplacement "
+"destination du picking"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__show_counter_lines
+msgid ""
+"En la vista tablet de código de barras si se activa este check, se muestra "
+"un contado de líneas con la cantidad actualizada"
+msgstr ""
+"Si ce champ est coché, dans la vue tablette de code de barre de groupes, "
+"on affichera un compteur de lignes avec la quantité mise à jour"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_res_company__stock_barcode_force_increment
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_res_config_settings__stock_barcode_force_increment
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_force_increment
+msgid "Forzar sumar cantidad al escanear producto"
+msgstr "Forcer l'ajout de quantité lors du scan d'un produit"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__show_counter_lines
+msgid "Mostrar contador de líneas"
+msgstr "Afficher un compteur de lignes"
+
+#. module: stock_barcode_usability
+#. odoo-python
+#: code:addons/stock_barcode_usability/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"No puede añadir más unidades más unidades del producto {} de las que hay "
+"demandadas"
+msgstr ""
+"Vous ne pouvez pas ajouter plus de quantité que la quantité demandée"
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/components/main.xml:0
+#, python-format
+msgid "Nº líneas:"
+msgstr "Nombre de lignes:"
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/components/main.xml:0
+#, python-format
+msgid "Nº sublíneas:"
+msgstr "Nombre de sous-lignes:"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_close_partial_batch
+msgid "PDA Agrupaciones: Cerrar agrupación parcial"
+msgstr "PDA Groupes: Fermer un groupe partiel"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__apply_dest_location_all_lines
+msgid "PDA: Aplicar ubicación destino a todas las líneas"
+msgstr "PDA: Appliquer l'emplacement destination à toutes les lignes"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_avoid_grouped_lines
+msgid "PDA: Evitar agrupar líneas"
+msgstr "PDA: Eviter les groupes"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_add_new_product
+msgid ""
+"Permitir añadir nuevos productos, de forma manual, en la interfaz de códigos"
+" de barra, mostrando el botón correspondiente"
+msgstr ""
+"Permettre d'ajouter des produits nouveaux, de manière manuelle, dans l'interface"
+" de code de barre, en montrant le bouton correspondant"
+
+#. module: stock_barcode_usability
+#: model:res.groups,name:stock_barcode_usability.group_cancel_barcode_picking
+msgid "Permitir cancelar albaranes PDA"
+msgstr "Permettre de canceler les transferts PDA"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_allow_any_dest_location
+msgid "Permitir cualquier ubicación destino"
+msgstr "Permettre n'importe quel emplacement destination"
+
+#. module: stock_barcode_usability
+#: model:ir.model,name:stock_barcode_usability.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Type de transfert"
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/barcode_picking_model.esm.js:0
+#, python-format
+msgid "Please scan the origin location first."
+msgstr "Veuillez scanner d'abord l'emplacement d'origine."
+
+#. module: stock_barcode_usability
+#: model:ir.model,name:stock_barcode_usability.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Mouvements de produit (Ligne de mouvement de stock)"
+
+#. module: stock_barcode_usability
+#: model:ir.model,name:stock_barcode_usability.model_stock_quant
+msgid "Quants"
+msgstr "Quantités"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_restrict_location
+msgid "Restricción de ubicación"
+msgstr "Restreindre l'emplacement"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_restrict_products
+msgid "Restringir escaneo a productos del albarán"
+msgstr "Restreindre le scan des produits au picking"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_avoid_grouped_lines
+msgid ""
+"Si este campo está marcado, en la vista tablet de código de barras de "
+"albaranes y agrupaciones no se agruparán las líneas en sublíneas para "
+"facilitar su preparación"
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, les lignes ne seront pas regroupées en sous-lignes "
+"pour faciliter leur préparation"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_allow_any_dest_location
+msgid ""
+"Si este campo está marcado, en la vista tablet de código de barras de "
+"albaranes y agrupaciones se permitirá escanear cualquier ubicación destino, "
+"independientemente de si cuelga o no de la ubicación destino del "
+"albarán/tipo de operación"
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, il sera possible de scanner n'importe quel "
+"emplacement destination, indépendamment de si il est ou non "
+"hierarchiquement sous l'emplacement destination du picking/"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_close_partial_batch
+msgid ""
+"Si se marca la casilla, en la interfaz de código de barras se cerrará "
+"pantalla de la agrupación al validarse incluso si aún quedan líneas por "
+"validar"
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, la fenêtre de la agrupation sera fermée lors de la "
+"validation même si des lignes restent à valider"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_allow_scan_extra_qty
+msgid ""
+"Si se marca la casilla, en la interfaz de código de barras se permitirá "
+"escanear más cantidad de la reservada"
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, il sera possible de scanner plus de la quantité "
+"réservée"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_res_company__stock_barcode_force_increment
+#: model:ir.model.fields,help:stock_barcode_usability.field_res_config_settings__stock_barcode_force_increment
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_force_increment
+msgid ""
+"Si se marca la casilla, en la interfaz de código de barras se sumará "
+"cantidad a la línea al escanear producto incluso si el producto de esta "
+"tiene seguimiento por lotes"
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, la quantité sera ajoutée à la ligne lors du scan "
+"d'un produit même si le produit a un suivi par lots"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_restrict_products
+msgid ""
+"Si se marca la casilla, solo se permitirá escanear productos del albarán y "
+"lotes y paquetes que los contienen."
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, il sera possible de scanner des produits "
+"uniquement ceux qui sont dans les lignes du picking"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_restrict_location
+msgid ""
+"Si se marca la casilla, solo se permitirá escanear ubicaciones que estén "
+"presentes en las líneas del albarán/lote."
+msgstr ""
+"Si ce champ est coché, dans l'interface tablette de code de barre des "
+"albarans et groupes, il sera possible de scanner des emplacements "
+"uniquement ceux qui sont dans les lignes du picking"
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/barcode_picking_model.esm.js:0
+#, python-format
+msgid "The scanned location doesn't belong to this operation's destination"
+msgstr "L'emplacement scanne n'appartient pas à l'emplacement destination de ce "
+"picking"
+
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/barcode_picking_model.esm.js:0
+#, python-format
+msgid ""
+"The scanned location is not available in this operation. Please scan the "
+"correct location."
+msgstr ""
+"L'emplacement scanne n'est pas disponible dans ce picking. Veuillez scanner "
+"l'emplacement correct."
+
+#. module: stock_barcode_usability
+#. odoo-javascript
+#: code:addons/stock_barcode_usability/static/src/js/models/barcode_picking_model.esm.js:0
+#, python-format
+msgid ""
+"The scanned product belongs to another location. Please scan the correct "
+"location first."
+msgstr ""
+"Le produit scanne appartient à un autre emplacement. Veuillez scanner "
+"d'abord l'emplacement correct."
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,help:stock_barcode_usability.field_stock_picking_type__stock_barcode_groupby_loc_and_prod
+msgid ""
+"permite agrupar las líneas de albarán por ubicación y referencia "
+"independientemente del albaran donde provenga"
+msgstr ""
+"Permet de regrouper les lignes de picking par emplacement et référence "
+"indépendamment du picking d'origine"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_add_new_product
+msgid "¿Permitir añadir producto PDA?"
+msgstr "Permet d'ajouter un produit PDA?"
+
+#. module: stock_barcode_usability
+#: model:ir.model.fields,field_description:stock_barcode_usability.field_stock_picking_type__stock_barcode_allow_scan_extra_qty
+msgid "¿Permitir más cantidad de la reservada en PDA?"
+msgstr "Permet de scanner plus de la quantité réservée en PDA?"

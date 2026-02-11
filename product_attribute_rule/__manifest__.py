@@ -5,7 +5,7 @@
 {
     "name": "Product Attribute Rule",
     "summary": "Reglas restrictivas para combinaciones de atributos",
-    "version": "17.0.1.0.1",
+    "version": "17.0.1.0.3",
     "license": "LGPL-3",
     "category": "Product",
     "sequence": 15,

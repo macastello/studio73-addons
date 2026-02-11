@@ -5,3 +5,5 @@ from . import edicom_export_configuration
 from . import edicom_export_mixin
 from . import account_move
 from . import account_move_line
+from . import stock_picking
+from . import stock_quant_package
